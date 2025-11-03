@@ -1,287 +1,40 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ChiikArcade</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<style>
-:root{
---bg:#1a1a2e;
---color-1:#d4f8ff;
---color-2:#f6d8e2;
---color-3:#d3c1ff;
---accent:#ffd6f0;
-}
-
-*{box-sizing:border-box;}
-html,body{
-height:100%;
-margin:0;
-background:var(--bg);
-font-family:Arial,sans-serif;
-overflow:hidden;
-}
-
-/* fixed slight misalignment...i think..? */
-.game-container{
-position:relative;
-width:100%;
-height:100%;
-background-image:url('https://i.pinimg.com/736x/9c/f6/e5/9cf6e579f81574b3c28fe07c90305c9c.jpg');
-background-size:cover;
-background-position:center;
-overflow:hidden;
-}
-
-.overlay{
-pointer-events:none;
-position:absolute;
-inset:0;
-background:linear-gradient(180deg,rgba(26,26,46,0.15),rgba(26,26,46,0.25));
-z-index:2;
-}
-
-.ui-frame{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:3;
-pointer-events:none;
-user-select:none;
-opacity:0.95;
-}
-
-.title{
-position:absolute;
-top:6%;
-left:50%;
-transform:translateX(-50%);
-font-family:'Press Start 2P',cursive;
-font-size:clamp(1.8rem,5.5vw,3.6rem);
-color:#fff;
-z-index:11;
-text-align:center;
-pointer-events:none;
-animation:colorCycle 6s infinite linear,softFlicker 3.2s infinite ease-in-out;
-}
-
-@keyframes colorCycle{
-0%{color:#ffffff;text-shadow:0 0 6px #fff;}
-20%{color:var(--color-2);text-shadow:0 0 10px var(--color-2);}
-50%{color:var(--color-3);text-shadow:0 0 12px var(--color-3);}
-80%{color:var(--color-1);text-shadow:0 0 10px var(--color-1);}
-100%{color:#ffffff;text-shadow:0 0 6px #fff;}
-}
-
-@keyframes softFlicker{
-0%,100%{filter:brightness(1);}
-50%{filter:brightness(1.03);}
-}
-
-/* tightened layout and overlapping buttons, pls help me */
-.menu-buttons{
-position:absolute;
-top:53%;
-right:12%;
-transform:translateY(-50%);
-width:clamp(220px,30vw,420px);
-z-index:12;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-.menu-buttons ul{
-list-style:none;
-padding:0;
-margin:0;
-display:flex;
-flex-direction:column;
-align-items:center;
-width:100%;
-gap:0;
-}
-
-.menu-buttons li{
-width:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-margin-top:-45px; /* closer overlap */
-}
-
-.menu-buttons a{
-display:inline-block;
-width:100%;
-transform-origin:center;
-transition:transform 420ms cubic-bezier(.2,.9,.22,1),filter 300ms ease;
-pointer-events:auto;
-}
-
-.menu-buttons img{
-width:100%;
-height:auto;
-display:block;
-user-select:none;
--webkit-user-drag:none;
-border-radius:0;
-transition:transform 420ms cubic-bezier(.2,.9,.22,1),filter 300ms ease;
-}
-
-.menu-buttons a:hover{
-transform:translateY(-6px)scale(1.12)rotate(-3deg);
-z-index:20;
-}
-
-.menu-buttons a:active{
-transform:translateY(-2px)scale(1.06)rotate(0deg);
-transition-duration:120ms;
-}
-
-.menu-buttons a:hover img{
-transform:translateY(-4px)scale(1.03)rotate(-1deg);
-filter:drop-shadow(0 6px 20px rgba(255,210,240,0.14))saturate(120%)contrast(1.05);
-animation:wiggle 900ms cubic-bezier(.2,.9,.22,1);
-}
-
-@keyframes wiggle{
-0%{transform:translateY(-4px)rotate(-1deg)scale(1.03);}
-20%{transform:translateY(-6px)rotate(2deg)scale(1.05);}
-40%{transform:translateY(-5px)rotate(-2deg)scale(1.04);}
-60%{transform:translateY(-6px)rotate(1deg)scale(1.05);}
-100%{transform:translateY(-4px)rotate(-1deg)scale(1.03);}
-}
-
-/* I HATE KDHFKSHCJ character placement */
-.character-sprite{
-position:absolute;
-bottom:5%;
-left:8%;
-width:45%;
-max-width:450px;
-z-index:10;
-pointer-events:none;
-animation:floatSway 5s ease-in-out infinite;
-filter:drop-shadow(0 18px 28px rgba(0,0,0,0.6));
-}
-
-@keyframes floatSway{
-0%{transform:translate3d(0,0,0)rotate(-1deg);}
-25%{transform:translate3d(-6px,-10px,0)rotate(2deg);}
-50%{transform:translate3d(0,-16px,0)rotate(-2deg);}
-75%{transform:translate3d(8px,-8px,0)rotate(3deg);}
-100%{transform:translate3d(0,0,0)rotate(-1deg);}
-}
-
-.particles{
-position:absolute;
-inset:0;
-pointer-events:none;
-z-index:6;
-}
-
-.particle{
-position:absolute;
-border-radius:50%;
-opacity:0;
-filter:blur(0.6px);
-}
-
-.pixel{
-position:absolute;
-image-rendering:pixelated;
-opacity:0;
-}
-
-.vignette{
-position:absolute;
-inset:0;
-pointer-events:none;
-background:radial-gradient(ellipse at center,rgba(0,0,0,0.0)40%,rgba(0,0,0,0.25)100%);
-z-index:100;
-}
-
-@media(max-width:700px){
-.menu-buttons{right:6%;width:40vw;top:62%;}
-.character-sprite{width:52%;max-width:320px;left:4%;}
-}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ChiikArcade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
 </head>
-<body>
 
-<!-- layout now clean and centered -->
+<body>
 <div class="game-container" id="gameContainer">
-<img src="https://media.discordapp.net/attachments/1143020365795307552/1432905882538082447/8qcIqwAAAAZJREFUAwBJS8P0drascAAAAABJRU5ErkJggg.png?ex=6902c118&is=69016f98&hm=2141e5a7a3aca15f6fa6506fe077e6bca58662865d09ebc120ac9c2ee085f3ec&=&format=webp&quality=lossless&width=540&height=540" alt="Pixel art character" class="character-sprite" id="characterSprite">
-<img src="https://media.discordapp.net/attachments/1143020365795307552/1432907672675422370/Press_Start_2P.png?ex=6902c2c3&is=69017143&hm=a1353e6952dfaa69586ce685705a7931cb31c8fafa5a3f907853c9fb85544d96&=&format=webp&quality=lossless&width=1178&height=663" alt="Game UI Frame" class="ui-frame" aria-hidden="true">
+    <img src="assests/chiksomething.png" alt="Pixel art character" class="character-sprite" id="characterSprite">
+
+    <img src="assests/Press_Start_2P.png" alt="Game UI Frame" class="ui-frame" aria-hidden="true">
+</div>
+
 <div class="overlay"></div>
+
 <h1 class="title">ChiikArcade</h1>
+
 <nav class="menu-buttons" aria-label="Main menu">
-<ul>
-<li><a href="#"><img src="https://media.discordapp.net/attachments/1143020365795307552/1432917342341566494/Untitled_design_18.png?ex=6902cbc4&is=69017a44&hm=e4efd44cedbac9e4c816d8db51446e991d7840bd1aa2313daefe0f925d5856ac&=&format=webp&quality=lossless&width=590&height=295" alt="Arcade"></a></li>
-<li><a href="#"><img src="https://media.discordapp.net/attachments/1143020365795307552/1432917343318839336/Untitled_design_19.png?ex=6902cbc4&is=69017a44&hm=b1a8bcd6055295aa0d98dd8fdb75da31485c2858bdecccd348383d2d07ce5f95&=&format=webp&quality=lossless&width=590&height=295" alt="Shop"></a></li>
-<li><a href="#"><img src="https://media.discordapp.net/attachments/1143020365795307552/1432917342895079535/Untitled_design_20.png?ex=6902cbc4&is=69017a44&hm=5be1b334112fb4189edf599be2caf629b9f3d3341ef105610e4bea9be4290c4d&=&format=webp&quality=lossless&width=590&height=295" alt="About"></a></li>
-</ul>
+    <ul>
+        <li><a href="#"><img src="assests/arcade.png" alt="Arcade"></a></li>
+        <li><a href="#"><img src="assests/shop.png" alt="Shop"></a></li>
+        <li><a href="#"><img src="assests/about.png" alt="About"></a></li>
+    </ul>
+    
 </nav>
 <div class="particles" id="particles"></div>
 <div class="vignette"></div>
 </div>
 
-<script>
-(function createParticles(){
-const particleLayer=document.getElementById('particles');
-const pastelColors=['#fff7ff','#dff8ff','#fbe7f2','#fef0c7','#e9dcff'];
-const pixelColors=['#fff','#ffd6f0','#e7f4ff','#ffd9b6'];
-const rnd=(a,b)=>Math.random()*(b-a)+a;
-
-for(let i=0;i<18;i++){
-const p=document.createElement('div');
-p.className='particle';
-const size=rnd(8,42);
-p.style.width=size+'px';
-p.style.height=size+'px';
-p.style.left=rnd(-10,110)+'%';
-p.style.top=rnd(0,100)+'%';
-p.style.background=pastelColors[Math.floor(Math.random()*pastelColors.length)];
-p.style.opacity=0;
-p.style.filter='blur('+rnd(1,6)+'px)';
-particleLayer.appendChild(p);
-animateSoft(p,i);
-}
-
-for(let i=0;i<26;i++){
-const px=document.createElement('div');
-px.className='pixel';
-const size=Math.floor(rnd(6,14));
-px.style.width=size+'px';
-px.style.height=size+'px';
-px.style.left=rnd(0,100)+'%';
-px.style.top=rnd(0,100)+'%';
-px.style.background=pixelColors[Math.floor(Math.random()*pixelColors.length)];
-px.style.opacity=0;
-particleLayer.appendChild(px);
-animatePixel(px,i);
-}
-function animateSoft(el,seed){
-const delay=(seed%7)*160;
-const duration=rnd(6000,14000);
-el.animate([{opacity:0,transform:`translateY(0)scale(0.8)`},{opacity:rnd(0.35,0.85),transform:`translateY(-${rnd(6,40)}px)scale(${rnd(0.9,1.15)})`},{opacity:0,transform:`translateY(-${rnd(40,90)}px)scale(${rnd(1.05,1.3)})`}],{duration:duration,iterations:Infinity,delay:delay+rnd(0,800),easing:'cubic-bezier(.2,.8,.2,1)'});
-}
-function animatePixel(el,seed){
-const delay=(seed%5)*120;
-const duration=rnd(2800,5400);
-const dirX=(Math.random()>0.5?1:-1);
-const drift=rnd(8,60)*dirX;
-el.animate([{opacity:0,transform:`translate(0px,0px)scale(1)`},{opacity:rnd(0.5,0.95),transform:`translate(${drift}px,-${rnd(6,40)}px)scale(${rnd(0.9,1.35)})rotate(${rnd(-30,30)}deg)`},{opacity:0,transform:`translate(${drift*1.2}px,-${rnd(36,120)}px)scale(${rnd(1.1,1.6)})rotate(${rnd(-60,60)}deg)`}],{duration:duration,iterations:Infinity,delay:delay+rnd(0,400),easing:'cubic-bezier(.2,.8,.2,1)'});
-}
-})();
+<script src="indexFile.js">
 </script>
 </body>
 </html>
-```
+

@@ -1,0 +1,203 @@
+:root{
+--bg:#1a1a2e;
+--color-1:#d4f8ff;
+--color-2:#f6d8e2;
+--color-3:#d3c1ff;
+--accent:#ffd6f0;
+}
+
+*{box-sizing:border-box;}
+html,body{
+height:100%;
+margin:0;
+background:var(--bg);
+font-family:Arial,sans-serif;
+overflow:hidden;
+}
+
+/* fixed slight misalignment...i think..? */
+.game-container{
+position:relative;
+width:100%;
+height:100%;
+background-image:url('https://i.pinimg.com/736x/9c/f6/e5/9cf6e579f81574b3c28fe07c90305c9c.jpg');
+background-size:cover;
+background-position:center;
+overflow:hidden;
+}
+
+.overlay{
+pointer-events:none;
+position:absolute;
+inset:0;
+background:linear-gradient(180deg,rgba(26,26,46,0.15),rgba(26,26,46,0.25));
+z-index:2;
+}
+
+.ui-frame{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:3;
+pointer-events:none;
+user-select:none;
+opacity:0.95;
+}
+
+.title{
+position:absolute;
+top:6%;
+left:50%;
+transform:translateX(-50%);
+font-family:'Press Start 2P',cursive;
+font-size:clamp(1.8rem,5.5vw,3.6rem);
+color:#fff;
+z-index:11;
+text-align:center;
+pointer-events:none;
+animation:colorCycle 6s infinite linear,softFlicker 3.2s infinite ease-in-out;
+}
+
+@keyframes colorCycle{
+0%{color:#ffffff;text-shadow:0 0 6px #fff;}
+20%{color:var(--color-2);text-shadow:0 0 10px var(--color-2);}
+50%{color:var(--color-3);text-shadow:0 0 12px var(--color-3);}
+80%{color:var(--color-1);text-shadow:0 0 10px var(--color-1);}
+100%{color:#ffffff;text-shadow:0 0 6px #fff;}
+}
+
+@keyframes softFlicker{
+0%,100%{filter:brightness(1);}
+50%{filter:brightness(1.03);}
+}
+
+/* tightened layout and overlapping buttons, pls help me */
+.menu-buttons{
+position:absolute;
+top:53%;
+right:12%;
+transform:translateY(-50%);
+width:clamp(220px,30vw,420px);
+z-index:12;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.menu-buttons ul{
+list-style:none;
+padding:0;
+margin:0;
+display:flex;
+flex-direction:column;
+align-items:center;
+width:100%;
+gap:0;
+}
+
+.menu-buttons li{
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-top:-75px; /* closer overlap */
+}
+
+.menu-buttons a{
+display:inline-block;
+width:100%;
+transform-origin:center;
+transition:transform 420ms cubic-bezier(.2,.9,.22,1),filter 300ms ease;
+pointer-events:auto;
+}
+
+.menu-buttons img{
+width:100%;
+height:auto;
+display:block;
+user-select:none;
+-webkit-user-drag:none;
+border-radius:0;
+transition:transform 420ms cubic-bezier(.2,.9,.22,1),filter 300ms ease;
+}
+
+.menu-buttons a:hover{
+transform:translateY(-6px)scale(1.12)rotate(-3deg);
+z-index:20;
+}
+
+.menu-buttons a:active{
+transform:translateY(-2px)scale(1.06)rotate(0deg);
+transition-duration:120ms;
+}
+
+.menu-buttons a:hover img{
+transform:translateY(-4px)scale(1.03)rotate(-1deg);
+filter:drop-shadow(0 6px 20px rgba(255,210,240,0.14))saturate(120%)contrast(1.05);
+animation:wiggle 900ms cubic-bezier(.2,.9,.22,1);
+}
+
+@keyframes wiggle{
+0%{transform:translateY(-4px)rotate(-1deg)scale(1.03);}
+20%{transform:translateY(-6px)rotate(2deg)scale(1.05);}
+40%{transform:translateY(-5px)rotate(-2deg)scale(1.04);}
+60%{transform:translateY(-6px)rotate(1deg)scale(1.05);}
+100%{transform:translateY(-4px)rotate(-1deg)scale(1.03);}
+}
+
+/* I HATE KDHFKSHCJ character placement */
+.character-sprite{
+position:absolute;
+bottom:5%;
+left:8%;
+width:45%;
+max-width:450px;
+z-index:10;
+pointer-events:none;
+animation:floatSway 5s ease-in-out infinite;
+filter:drop-shadow(0 18px 28px rgba(0,0,0,0.6));
+}
+
+@keyframes floatSway{
+0%{transform:translate3d(0,0,0)rotate(-1deg);}
+25%{transform:translate3d(-6px,-10px,0)rotate(2deg);}
+50%{transform:translate3d(0,-16px,0)rotate(-2deg);}
+75%{transform:translate3d(8px,-8px,0)rotate(3deg);}
+100%{transform:translate3d(0,0,0)rotate(-1deg);}
+}
+
+.particles{
+position:absolute;
+inset:0;
+pointer-events:none;
+z-index:6;
+}
+
+.particle{
+position:absolute;
+border-radius:50%;
+opacity:0;
+filter:blur(0.6px);
+}
+
+.pixel{
+position:absolute;
+image-rendering:pixelated;
+opacity:0;
+}
+
+.vignette{
+position:absolute;
+inset:0;
+pointer-events:none;
+background:radial-gradient(ellipse at center,rgba(0,0,0,0.0)40%,rgba(0,0,0,0.25)100%);
+z-index:100;
+}
+
+@media(max-width:700px){
+.menu-buttons{right:6%;width:40vw;top:62%;}
+.character-sprite{width:52%;max-width:320px;left:4%;}
+}
