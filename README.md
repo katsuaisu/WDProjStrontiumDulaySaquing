@@ -5,7 +5,7 @@
 
 2. Second Sub-Title: Welcome to Woopie and Chiikawa's Arcade!
 
-3. Canva Link for our Logo: ![Logo For Website](assets/Webpage_Logo.png)
+3. Canva Link for our Logo: ![Logo For Website](assests/Webpage_Logo.png)
 
 4. Our website project is an "arcade" style website, that has many games, an in-game shop, and even an about me about the authors! We hope that the games we made using JavaScript and CSS will be fun to play!
 

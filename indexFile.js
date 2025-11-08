@@ -45,3 +45,25 @@ const drift=rnd(8,60)*dirX;
 el.animate([{opacity:0,transform:`translate(0px,0px)scale(1)`},{opacity:rnd(0.5,0.95),transform:`translate(${drift}px,-${rnd(6,40)}px)scale(${rnd(0.9,1.35)})rotate(${rnd(-30,30)}deg)`},{opacity:0,transform:`translate(${drift*1.2}px,-${rnd(36,120)}px)scale(${rnd(1.1,1.6)})rotate(${rnd(-60,60)}deg)`}],{duration:duration,iterations:Infinity,delay:delay+rnd(0,400),easing:'cubic-bezier(.2,.8,.2,1)'});
 }
 })();
+
+logo.style.position = "absolute";
+logo.style.top = "20x";
+logo.style.right = "20px";
+logo.style.width = "100px";
+
+const image = document.getElementById("characterSprite");
+let replacePng = true;
+
+document.addEventListener("keydown", function(event)
+{
+    if((event.key === "I") || (event.key === "i"))
+        if(replacePng)
+        {
+            image.src = "assests/photoOfMe.png";
+        }
+        else
+        {
+            image.src = "assests/chiksomething.png";
+        }
+    replacePng = !replacePng;
+});
