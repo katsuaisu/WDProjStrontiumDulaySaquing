@@ -52,18 +52,20 @@ logo.style.right = "20px";
 logo.style.width = "100px";
 
 const image = document.getElementById("characterSprite");
+const bonusLetter = document.querySelector(".clickHere");
+
 let replacePng = true;
 
-document.addEventListener("keydown", function(event)
+bonusLetter.addEventListener("click", function(event)
 {
-    if((event.key === "I") || (event.key === "i"))
-        if(replacePng)
-        {
-            image.src = "assests/photoOfMe.png";
-        }
-        else
-        {
-            image.src = "assests/chiksomething.png";
-        }
+    if(replacePng)
+    {
+        image.src = "assests/photoOfMe.png"
+    }
+    else
+    {
+        image.src = "assests/chiksomething.png"
+    }
     replacePng = !replacePng;
 });
+

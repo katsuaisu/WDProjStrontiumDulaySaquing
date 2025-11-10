@@ -215,6 +215,19 @@ footer
   z-index: 10;
 }
 
+.title .clickHere
+{
+  pointer-events: auto;
+  cursor: pointer;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
 
+.title .clickHere:hover
+{
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
 
 
