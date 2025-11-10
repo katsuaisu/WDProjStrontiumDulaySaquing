@@ -89,6 +89,7 @@ align-items:center;
 
 .menu-buttons ul{
 list-style:none;
+display: inline-block;
 padding:0;
 margin:0;
 display:flex;
@@ -218,6 +219,7 @@ footer
 .title .clickHere
 {
   pointer-events: auto;
+  display: inline-block;
   cursor: pointer;
   text-decoration: none;
   transition: text-decoration 0.2s ease;
@@ -225,6 +227,7 @@ footer
 
 .title .clickHere:hover
 {
+  transform: scale(1.2);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 2px;
