@@ -69,3 +69,4 @@ bonusLetter.addEventListener("click", function(event)
     replacePng = !replacePng;
 });
 
+// event listener is fun, its way easier to do event listener to change elements on the webpage
