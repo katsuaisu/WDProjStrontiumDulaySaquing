@@ -432,3 +432,23 @@ footer {
         padding-right: 0;
     }
 }
+
+.subtitle
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 90%);
+    color:#7ff0eb;
+}
+
+.cryingchiikawa
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+    width: 200px;
+    z-index: 10;
+    pointer-events: none;
+}

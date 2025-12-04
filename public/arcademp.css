@@ -15,16 +15,7 @@ font-family:Arial,sans-serif;
 overflow:hidden;
 }
 
-/* fixed slight misalignment...i think..? */
-.game-container{
-position:relative;
-width:100%;
-height:100%;
-background-image:url('https://i.pinimg.com/736x/9c/f6/e5/9cf6e579f81574b3c28fe07c90305c9c.jpg');
-background-size:cover;
-background-position:center;
-overflow:hidden;
-}
+
 
 .overlay{
 pointer-events:none;
@@ -153,6 +144,20 @@ footer
     top: 50%;
     left: 50%;
     transform: translate(-50%, 120%);
-    color:#43e6dd;
-    animation:colorCycle 6s infinite linear,softFlicker 3.2s infinite ease-in-out;
+    color:#7ff0eb;
 }
+
+.about-page {
+   
+    background-image: url('https://i.pinimg.com/originals/f7/3d/27/f73d27687e83de826ace9a7f6aef5fb7.gif'); 
+    background-size: cover;
+    background-position: center;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+
