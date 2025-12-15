@@ -332,3 +332,22 @@ body {
 .close-btn:hover { color: var(--text-dark); }
 
 h2 { margin-top: 0; color: var(--text-dark); }
+
+/* --- CUSTOM CURSOR FOR SHOP.CSS --- */
+
+html, body {
+    
+    cursor: url('../assests/cursorMomonga.png'), auto;
+}
+
+
+a, 
+button, 
+.clickHere, 
+.magic-name, 
+.close-btn, 
+.menu-buttons a,
+.char-card, 
+.currency-container {
+    cursor: url('../assests/cursorMomonga2.png'), pointer;
+}
