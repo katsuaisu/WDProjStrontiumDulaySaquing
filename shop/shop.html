@@ -4,49 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magical Shop</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shop.css">
 </head>
 <body>
 
+    <div class="background-container"></div>
     <div class="transition-overlay" id="overlay"></div>
 
-    <div class="currency-container">
+    <div id="maintenanceModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="toggleModal()">&times;</span>
+            <h2>Oops!</h2>
+            <p>Pochette Point system is currently in <strong>MAINTENANCE</strong>.</p>
+            <p style="font-size: 0.8em; color: #888;">Check back later to earn more coins!</p>
+        </div>
+    </div>
+
+    <div class="currency-container" onclick="toggleModal()">
         <img src="https://placehold.co/30x30/pink/white?text=P" alt="Poch Logo" class="poch-logo" id="pochLogo">
-        <span class="poch-plate" id="pochPlate">6067</span>
+        <span class="poch-plate" id="pochPlate" data-target="6067">0</span>
     </div>
 
     <div class="instruction-text">Click the character to check the theme before buying!</div>
     <br>
+    
     <div class="shop-grid">
         
         <div class="char-card" onclick="selectCharacter(this, 'chikshop.html')">
+            <div class="burst-effect"></div>
             <img src="../assests/magiChik.png" alt="Magical Chiikawa" class="sprite" id="magChik">
-            
             <div class="nameplate" id="magChikName">Magical Chiikawa</div>
-            
             <div class="price-plate" id="mcPlate">150 coins</div>
         </div>
 
         <div class="char-card" onclick="selectCharacter(this, 'usagishop.html')">
+            <div class="burst-effect"></div>
             <img src="../assests/eviUsa.png" alt="Evil Usagi" class="sprite" id="evilUsagi">
-            
             <div class="nameplate" id="evilUsagiName">Evil Usagi</div>
-            
             <div class="price-plate" id="euPlate">300 coins</div>
         </div>
 
         <div class="char-card" onclick="selectCharacter(this, 'hachishop.html')">
+            <div class="burst-effect"></div>
             <img src="../assests/magiHachi.png" alt="Magical Hachiware" class="sprite" id="magHachi">
-            
             <div class="nameplate" id="magHachiName">Magical Hachiware</div>
-            
             <div class="price-plate" id="mhPlate">267 coins</div>
         </div>
 
     </div>
 
-    <script src = "shop.js"></script>
+    <script src="shop.js"></script>
 </body>
 </html>
-
