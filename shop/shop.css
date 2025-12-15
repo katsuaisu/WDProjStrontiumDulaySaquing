@@ -19,7 +19,7 @@
             font-family: 'Press Start 2P', cursive; 
             background-color: var(--bg-pink);
     
-            background-image: url('shopBG.png');  /*fix this part*/ 
+            background-image: url('../assests/backgroundshop.gif'); 
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -82,7 +82,7 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.67s ease;
             position: relative;
         }
 
