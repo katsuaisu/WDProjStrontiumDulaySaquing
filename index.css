@@ -452,3 +452,21 @@ footer {
     z-index: 10;
     pointer-events: none;
 }
+
+/* cursor */
+
+html, body {
+   
+    cursor: url('assests/cursorMomonga.png'), auto;
+}
+
+a, 
+button, 
+.clickHere, 
+.magic-name, 
+.close-btn, 
+.menu-buttons a,
+.char-card, 
+.currency-container {
+    cursor: url('assests/cursorMomonga2.png'), pointer;
+}
