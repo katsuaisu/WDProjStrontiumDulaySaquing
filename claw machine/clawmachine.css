@@ -1,271 +1,205 @@
 :root {
-    --pink-light: #ffe6f0;
-    --pink-border: #ff9ec3;
-    --pink-dark: #ff69b4;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    -webkit-user-drag: none;
+    --claw-silver: linear-gradient(90deg, #999, #e6e6e6, #888);
+    --neon-pink: #ff69b4;
 }
 
 body {
-    background-color: var(--pink-light);
+    margin: 0;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    font-family: 'Courier New', Courier, monospace;
-    overflow: hidden;
+    font-family: 'Fredoka One', cursive;
 }
 
-.game-wrapper {
+.main-container {
     position: relative;
-    width: 900px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    width: 1000px;
+    height: 700px;
 }
 
-.machine-container {
-    position: relative;
-    width: 800px;
-    height: 550px;
-    border: 8px solid var(--pink-border);
-    border-radius: 25px;
-    background: #fff;
-    overflow: hidden;
-    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.4);
-}
-
-.bg-layer, .mach-back-layer, .mach-front-layer {
+.machine-frame {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    pointer-events: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 10; 
+    pointer-events: none; 
 }
 
-.bg-layer { z-index: 1; }
-.mach-back-layer { z-index: 2; }
-.plush-area { z-index: 3; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-.claw-assembly { z-index: 4; }
-.mach-front-layer { z-index: 10; pointer-events: none; }
-.ui-overlay { z-index: 11; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-
-.plush {
+.game-window {
     position: absolute;
-    width: 85px;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.3));
+    top: 15%;
+    left: 10%;
+    width: 80%;
+    height: 55%;
     z-index: 5;
+    overflow: hidden;
+    pointer-events: all;
 }
 
-.plush.caught {
+
+.claw-mechanism {
     position: absolute;
-    top: 55px !important;
-    left: -12px !important;
-    z-index: 100;
-    transform-origin: top center;
-    animation: swingPlush 2s infinite ease-in-out;
-}
-
-.plush.falling {
-    transition: top 0.6s ease-in, transform 0.6s linear;
-    top: 600px !important;
-    transform: rotate(45deg);
-}
-
-.anoko { top: 32%; left: 10%; }
-.kani { top: 52%; left: 8%; z-index: 6; }
-.usagi { top: 72%; left: 12%; z-index: 7; }
-.momonga { top: 52%; left: 25%; }
-.chiikabu { top: 72%; left: 28%; z-index: 7; }
-.shisa { top: 48%; left: 45%; z-index: 4; transform: scale(0.9); filter: brightness(0.9); }
-.rakko { top: 42%; left: 48%; z-index: 5; }
-.chiikawa { top: 68%; left: 46%; z-index: 6; }
-.kurimanju { top: 28%; right: 12%; }
-.hachiware { top: 70%; right: 10%; z-index: 7;}
-
-.claw-assembly {
-    position: absolute;
-    top: -100px; 
-    left: 50%; 
+    top: 0;
+    left: 50%;
     width: 60px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: left 0.1s linear, top 0.3s ease-out;
-    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.2));
+    height: 60px;
+    transform: translateX(-50%);
+    z-index: 20;
+    transition: left 0.1s linear, top 0.1s linear;
 }
 
 .claw-rod {
     width: 6px;
-    height: 100px;
-    background: linear-gradient(90deg, #ccc, #fff, #999);
-    border: 1px solid #888;
-}
-
-.claw-body {
-    position: relative;
-    width: 60px;
-    height: 40px;
-    margin-top: -5px;
-}
-
-.claw-knuckle {
-    width: 40px;
-    height: 30px;
-    background: radial-gradient(circle at 30% 30%, #ff80bf, #d1478c);
-    border-radius: 10px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-    border: 2px solid #fff;
-}
-
-.claw-arm {
-    width: 12px;
-    height: 60px;
-    background: #e0e0e0;
+    height: 500px;
+    background: var(--claw-silver);
     position: absolute;
-    top: 20px;
-    border-radius: 0 0 10px 10px;
-    transition: transform 0.5s cubic-bezier(0.4, 2, 0.6, 1);
-    transform-origin: top center;
-    border: 1px solid #999;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
 }
 
-.claw-arm.left {
+.claw-head {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background: var(--claw-silver);
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.arm {
+    width: 10px;
+    height: 40px;
+    background: var(--claw-silver);
+    position: absolute;
+    top: 15px;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.arm-left {
     left: 0;
-    transform: rotate(25deg);
-    border-right: none;
+    transform-origin: top right;
+    transform: rotate(30deg);
 }
 
-.claw-arm.right {
+.arm-right {
     right: 0;
-    transform: rotate(-25deg);
-    border-left: none;
+    transform-origin: top left;
+    transform: rotate(-30deg);
 }
 
-.claw-assembly.grabbing .claw-arm.left { transform: rotate(-15deg); }
-.claw-assembly.grabbing .claw-arm.right { transform: rotate(15deg); }
 
-.controls-container {
-    width: 800px;
-    height: 140px;
-    background: #ffcce0;
-    border-radius: 20px;
+.claw-mechanism.grabbing .arm-left { transform: rotate(-10deg); }
+.claw-mechanism.grabbing .arm-right { transform: rotate(10deg); }
+
+
+.plushie-pile {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.plush {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+#anokoPlush { top: 10px; left: 10px; }
+#kaniPlush { top: 90px; left: 10px; }
+#usagiPlush { bottom: 10px; left: 10px; }
+#momongaPlush { top: 90px; left: 90px; }
+#chiikabuPlush { bottom: 10px; left: 90px; }
+#chiikawaPlush { bottom: 10px; left: 50%; transform: translateX(-50%); }
+#rakkoPlush { bottom: 90px; left: 50%; transform: translateX(-50%); }
+#shisaPlush { bottom: 10px; left: 50%; transform: translateX(-50%); z-index: -1; }
+#hachiwarePlush { bottom: 10px; right: 10px; }
+#kurimanjuPlush { top: 10px; right: 10px; }
+
+
+.controls {
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+    height: 20%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 0 40px;
-    border: 4px solid #fff;
-    box-shadow: inset 0 0 30px rgba(255, 100, 150, 0.3);
+    pointer-events: all;
 }
+
+.dark-btn {
+    background: #331a26;
+    color: white;
+    padding: 15px 30px;
+    border: 3px solid #ffb7d2;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.timer-section {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.timer-display {
+    background: #000;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 30px;
+    padding: 5px 15px;
+    border: 2px solid #444;
+}
+
+.drop-btn {
+    background: var(--neon-pink);
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px #b30059;
+}
+
+.drop-btn:active { transform: translateY(2px); box-shadow: 0 2px #b30059; }
 
 .d-pad {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-areas: ". up ." "left . right" ". down .";
     gap: 5px;
 }
 
-.d-row {
-    display: flex;
-    gap: 5px;
-}
-
-.arrow-btn {
-    width: 55px;
-    height: 55px;
+.dir-btn {
+    width: 50px;
     cursor: pointer;
-    transition: transform 0.1s, filter 0.2s;
-    filter: drop-shadow(0 4px 0 #d689a8);
+    transition: filter 0.3s;
 }
 
-.arrow-btn:active:not(.disabled) {
-    transform: translateY(4px);
-    filter: none;
-}
-
-.arrow-btn.disabled {
-    opacity: 0.5;
+.dir-btn.locked {
+    filter: grayscale(1) opacity(0.5);
     cursor: not-allowed;
-    filter: grayscale(1);
-    transform: none;
 }
 
-.action-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
+
+.success-glow {
+    box-shadow: 0 0 50px gold;
+    animation: win-pulse 1s infinite;
 }
 
-.display-screen {
-    width: 140px;
-    height: 45px;
-    background: #222;
-    color: #ff1a1a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
-    border: 2px solid #555;
-    text-shadow: 0 0 8px red;
-}
-
-.play-btn-wrapper {
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.1s;
-}
-
-.play-btn-wrapper:active { transform: scale(0.95); }
-
-.play-button {
-    width: 120px;
-    height: auto;
-    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
-}
-
-.btn-label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-family: 'Verdana', sans-serif;
-    font-weight: 900;
-    font-size: 20px;
-    pointer-events: none;
-    text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
-    letter-spacing: 1px;
-}
-
-@keyframes swingPlush {
-    0% { transform: rotate(5deg); }
-    50% { transform: rotate(-5deg); }
-    100% { transform: rotate(5deg); }
-}
-
-@keyframes flashScreen {
-    0% { background-color: #222; color: red; }
-    50% { background-color: red; color: #222; }
-    100% { background-color: #222; color: red; }
-}
-
-.flashing {
-    animation: flashScreen 0.2s infinite;
+@keyframes win-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
