@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claw Machine</title>
+    <link rel="stylesheet" href="clawmachine.css">
+</head>
+<body>
+
+    <div class="game-wrapper">
+        <div class="machine-container">
+            <img src="clawBack.png" alt="Background" class="bg-layer">
+            <img src="machBack.png" alt="Machine Back" class="mach-back-layer">
+
+            <div class="plush-area">
+                <img src="anokoPlush.png" class="plush anoko" id="anoko">
+                <img src="kaniPlush.png" class="plush kani" id="kani">
+                <img src="usagiPlush.png" class="plush usagi" id="usagi">
+                
+                <img src="momongaPlush.png" class="plush momonga" id="momonga">
+                <img src="chiikabuPlush.png" class="plush chiikabu" id="chiikabu">
+                
+                <img src="shisaPlush.png" class="plush shisa" id="shisa">
+                <img src="rakkoPlush.png" class="plush rakko" id="rakko">
+                <img src="chiikawaPlush.png" class="plush chiikawa" id="chiikawa">
+                
+                <img src="kurimanjuPlush.png" class="plush kurimanju" id="kurimanju">
+                <img src="hachiwarePlush.png" class="plush hachiware" id="hachiware">
+            </div>
+
+            <div class="claw-assembly" id="claw">
+                <div class="claw-rod"></div>
+                <div class="claw-body">
+                    <div class="claw-knuckle"></div>
+                    <div class="claw-arm left"></div>
+                    <div class="claw-arm right"></div>
+                </div>
+            </div>
+
+            <img src="machPic.png" alt="Machine Front" class="mach-front-layer">
+            
+            <div class="ui-overlay">
+                <div class="prize-chute-area" id="chute-area"></div>
+            </div>
+        </div>
+
+        <div class="controls-container">
+            <div class="d-pad">
+                <div class="d-row">
+                    <img src="upButton.png" class="arrow-btn up" data-dir="up">
+                </div>
+                <div class="d-row">
+                    <img src="leftButton.png" class="arrow-btn left" data-dir="left">
+                    <img src="downButton.png" class="arrow-btn down" data-dir="down">
+                    <img src="rightButton.png" class="arrow-btn right" data-dir="right">
+                </div>
+            </div>
+            
+            <div class="action-panel">
+                <div class="display-screen">
+                    <span id="timer-text">READY</span>
+                </div>
+                <div class="play-btn-wrapper">
+                    <img src="darkButton.png" id="play-btn" class="play-button">
+                    <span class="btn-label" id="btn-label">PLAY</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="clawmachine.js"></script>
+</body>
+</html>
