@@ -1,146 +1,167 @@
-const claw = document.getElementById('claw');
-const rod = document.getElementById('rod');
+
+const claw = document.getElementById('claw-system');
 const playBtn = document.getElementById('playBtn');
-const timerText = document.getElementById('timerText');
-const dropBtn = document.getElementById('manualDropBtn');
-const dirButtons = document.querySelectorAll('.dir-btn');
-const plushies = document.querySelectorAll('.plush');
+const playText = document.getElementById('play-text');
+const timerDisplay = document.getElementById('timer-text');
+const btnLeft = document.getElementById('btnLeft');
+const btnRight = document.getElementById('btnRight');
+const plushZone = document.querySelector('.plush-zone');
 
-let gameState = 'IDLE'; 
-let timeLeft = 10;
-let timerInterval;
+
+const CLAW_SPEED = 0.8; 
+const GRAB_TOLERANCE = 90; 
+
+
+let state = 'IDLE'; 
 let clawX = 50; 
-let clawY = 0;  
-let moveInterval;
+let moveDirection = 0; 
+let gameLoopID;
+let timerInterval;
+let timeLeft = 10;
 
-
-const MIN_X = 5;
-const MAX_X = 95;
+function gameLoop() {
+  if (state === 'PLAYING') {
+    clawX += moveDirection * CLAW_SPEED;
+    if (clawX < 10) clawX = 10;
+    if (clawX > 90) clawX = 90;
+    claw.style.left = clawX + '%';
+  }
+  requestAnimationFrame(gameLoop);
+}
+gameLoopID = requestAnimationFrame(gameLoop);
 
 
 playBtn.addEventListener('click', () => {
-    if (gameState !== 'IDLE') return;
-    
-    gameState = 'PLAYING';
-    timeLeft = 10;
-    timerText.innerText = timeLeft;
-    dropBtn.disabled = false;
-    
+  if (state === 'IDLE') startGame();
+  else if (state === 'PLAYING') dropClaw();
+});
+
+function startGame() {
+  state = 'PLAYING';
+  playText.textContent = "DROP!";
+  timeLeft = 10;
+  timerDisplay.textContent = timeLeft;
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = timeLeft;
+    if (timeLeft <= 0) dropClaw();
+  }, 1000);
+}
+
+const startMove = (dir) => { if(state === 'PLAYING') moveDirection = dir; };
+const stopMove = () => { moveDirection = 0; };
+
+btnLeft.addEventListener('mousedown', () => startMove(-1));
+btnLeft.addEventListener('mouseup', stopMove);
+btnLeft.addEventListener('mouseleave', stopMove);
+
+btnRight.addEventListener('mousedown', () => startMove(1));
+btnRight.addEventListener('mouseup', stopMove);
+btnRight.addEventListener('mouseleave', stopMove);
+
+
+
+function dropClaw() {
+  if (state !== 'PLAYING') return;
+  state = 'DROPPING';
+  clearInterval(timerInterval);
+  moveDirection = 0; 
   
-    dirButtons.forEach(btn => btn.classList.remove('locked'));
+  // 1. Drop
+  claw.style.transition = "top 1.5s ease-in-out";
+  claw.style.top = "65%"; 
 
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        timerText.innerText = timeLeft;
-        if (timeLeft <= 0) {
-            triggerDrop();
-        }
-    }, 1000);
-});
-
-
-dirButtons.forEach(btn => {
-    btn.addEventListener('mousedown', () => {
-        if (gameState !== 'PLAYING' || btn.classList.contains('locked')) return;
-        
-        const direction = btn.dataset.dir;
-        moveInterval = setInterval(() => {
-            if (direction === 'left' && clawX > MIN_X) clawX -= 1;
-            if (direction === 'right' && clawX < MAX_X) clawX += 1;
-            claw.style.left = `${clawX}%`;
-        }, 20);
-    });
-
-    btn.addEventListener('mouseup', () => {
-        clearInterval(moveInterval);
-        if (gameState === 'PLAYING') {
-            btn.classList.add('locked'); 
-        }
-    });
-});
-
-
-dropBtn.addEventListener('click', triggerDrop);
-
-function triggerDrop() {
-    if (gameState !== 'PLAYING') return;
-    
-    gameState = 'DROPPING';
-    clearInterval(timerInterval);
-    dropBtn.disabled = true;
-    
-    
-    let depth = 0;
-    const dropSpeed = setInterval(() => {
-        depth += 5;
-        claw.style.top = depth + 'px';
-        
-        if (depth >= 250) { 
-            clearInterval(dropSpeed);
-            grabSequence();
-        }
-    }, 20);
+  setTimeout(() => {
+    attemptGrab();
+  }, 1500);
 }
 
-function grabSequence() {
-    claw.classList.add('grabbing');
-    
-    
-    let target = null;
-    const clawRect = claw.getBoundingClientRect();
+function attemptGrab() {
+  state = 'GRABBING';
+  claw.classList.add('grabbing');
 
-    plushies.forEach(p => {
-        const pRect = p.getBoundingClientRect();
-        const dist = Math.hypot(clawRect.x - pRect.x, clawRect.y - pRect.y);
-        if (dist < 60) target = p;
-    });
+  const caughtPlush = checkCollision();
 
-    setTimeout(() => {
-     
-        let depth = 250;
-        const liftSpeed = setInterval(() => {
-            depth -= 5;
-            claw.style.top = depth + 'px';
-            if (target) {
-                target.style.top = (depth + 40) + 'px';
-                target.style.left = `${clawX}%`;
-            }
+  setTimeout(() => {
+    // 2. Rise
+    state = 'RISING';
+    claw.style.top = "0%"; 
 
-            if (depth <= 0) {
-                clearInterval(liftSpeed);
-                returnToChute(target);
-            }
-        }, 20);
-    }, 600);
-}
-
-function returnToChute(caughtItem) {
-    
-    const slideSpeed = setInterval(() => {
-        if (clawX > MIN_X) {
-            clawX -= 1;
-            claw.style.left = `${clawX}%`;
-            if (caughtItem) caughtItem.style.left = `${clawX}%`;
-        } else {
-            clearInterval(slideSpeed);
-            release(caughtItem);
-        }
-    }, 20);
-}
-
-function release(item) {
-    claw.classList.remove('grabbing');
-    if (item) {
-        item.style.top = '400px'; 
-        item.style.opacity = '0';
-        setTimeout(() => alert("You caught a " + item.dataset.name + "!"), 500);
+    if (caughtPlush) {
+      
+      caughtPlush.style.left = ''; 
+      caughtPlush.style.top = ''; 
+      claw.appendChild(caughtPlush);
     }
-    
-   
+
     setTimeout(() => {
-        gameState = 'IDLE';
-        timerText.innerText = '--';
-        clawX = 50;
-        claw.style.left = '50%';
-    }, 1000);
+      moveToChute(caughtPlush);
+    }, 1500);
+
+  }, 600);
+}
+
+function moveToChute(caughtPlush) {
+  state = 'RETURNING';
+  claw.style.transition = "left 2s linear, top 1s"; 
+  claw.style.left = "15%";
+
+  setTimeout(() => {
+    // 3. Release
+    claw.classList.remove('grabbing'); 
+    
+    if (caughtPlush) {
+      caughtPlush.style.transition = "top 0.5s ease-in, opacity 0.5s";
+      caughtPlush.style.top = "300px"; // Drop out of frame
+      caughtPlush.style.opacity = "0";
+      
+      setTimeout(() => {
+        caughtPlush.remove();
+        resetGame("WIN!");
+      }, 500);
+    } else {
+      resetGame("AGAIN");
+    }
+  }, 2100);
+}
+
+function resetGame(msg) {
+  playText.textContent = msg;
+  setTimeout(() => {
+    state = 'IDLE';
+    playText.textContent = "PLAY";
+    claw.style.transition = "none"; 
+    clawX = 50;
+    claw.style.left = "50%";
+    timerDisplay.textContent = "10";
+  }, 1500);
+}
+
+function checkCollision() {
+  const clawRect = claw.getBoundingClientRect();
+  const plushies = document.querySelectorAll('.plush-zone .plush-wrapper');
+  
+  let target = null;
+  let minDist = 9999;
+
+  plushies.forEach(p => {
+    const pRect = p.getBoundingClientRect();
+    
+    
+    const clawCX = clawRect.left + (clawRect.width / 2);
+    const clawCY = clawRect.bottom - 10; 
+    
+    const plushCX = pRect.left + (pRect.width / 2);
+    const plushCY = pRect.top + (pRect.height / 2); 
+
+    const dist = Math.hypot(clawCX - plushCX, clawCY - plushCY);
+
+    if (dist < GRAB_TOLERANCE && dist < minDist) {
+      minDist = dist;
+      target = p;
+    }
+  });
+
+  return target;
 }

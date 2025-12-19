@@ -1,64 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Save The Chiikaw-lings!</title>
-    <link rel="stylesheet" href="clawmachine.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Save The Chiikaw-lings!</title>
+  <link rel="stylesheet" href="clawmachine.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="main-container">
-        <div class="background-layer" style="background-image: url('../assets/clawBack.png');"></div>
+  <div class="machine-wrapper">
+    
+    <img src="../assets/machBack.png" class="layer-back" alt="Machine Interior">
 
-        <div class="machine-frame" style="background-image: url('../assets/machPic.png');">
-            
-            <div class="game-window" style="background-image: url('../assets/machBack.png');">
-                
-                <div class="claw-mechanism" id="claw">
-                    <div class="claw-rod" id="rod"></div>
-                    <div class="claw-head">
-                        <div class="claw-joint"></div>
-                        <div class="arm arm-left"></div>
-                        <div class="arm arm-right"></div>
-                    </div>
-                </div>
-
-                <div class="plushie-pile" id="plushieContainer">
-                    <img src="../assets/anokoPlush.png" class="plush" id="anokoPlush" data-name="Anoko">
-                    <img src="../assets/kaniPlush.png" class="plush" id="kaniPlush" data-name="Kani">
-                    <img src="../assets/usagiPlush.png" class="plush" id="usagiPlush" data-name="Usagi">
-                    <img src="../assets/momongaPlush.png" class="plush" id="momongaPlush" data-name="Momonga">
-                    <img src="../assets/chiikabuPlush.png" class="plush" id="chiikabuPlush" data-name="Chiikabu">
-                    <img src="../assets/chiikawaPlush.png" class="plush" id="chiikawaPlush" data-name="Chiikawa">
-                    <img src="../assets/rakkoPlush.png" class="plush" id="rakkoPlush" data-name="Rakko">
-                    <img src="../assets/shisaPlush.png" class="plush" id="shisaPlush" data-name="Shisa">
-                    <img src="../assets/hachiwarePlush.png" class="plush" id="hachiwarePlush" data-name="Hachiware">
-                    <img src="../assets/kurimanjuPlush.png" class="plush" id="kurimanjuPlush" data-name="Kurimanju">
-                </div>
-
-                <div class="prize-chute"></div>
-            </div>
-
-            <div class="controls">
-                <button class="dark-btn" id="playBtn">PLAY</button>
-                
-                <div class="timer-section">
-                    <div class="timer-display" id="timerText">--</div>
-                    <button class="drop-btn" id="manualDropBtn" disabled>DROP</button>
-                </div>
-
-                <div class="d-pad">
-                    <img src="assets/upButton.png" class="dir-btn" id="upBtn" data-dir="up">
-                    <img src="assets/downButton.png" class="dir-btn" id="downBtn" data-dir="down">
-                    <img src="assets/leftButton.png" class="dir-btn" id="leftBtn" data-dir="left">
-                    <img src="assets/rightButton.png" class="dir-btn" id="rightBtn" data-dir="right">
-                </div>
-            </div>
+    <div class="game-area">
+      
+      <div id="claw-system">
+        <div class="cable"></div>
+        <div class="claw-body">
+          <div class="claw-knuckle"></div>
+          <div class="claw-fingers">
+            <div class="finger finger-left"></div>
+            <div class="finger finger-right"></div>
+          </div>
         </div>
+      </div>
+
+      <div class="plush-zone">
+        <div class="plush-wrapper" style="left: 10%; top: 35%; z-index: 2;">
+            <img src="../assets/anokoPlush.png" class="plush">
+        </div>
+        <div class="plush-wrapper" style="left: 65%; top: 30%; z-index: 2;">
+            <img src="../assets/kurimanjuPlush.png" class="plush">
+        </div>
+        
+        <div class="plush-wrapper" style="left: 25%; top: 45%; z-index: 3;">
+            <img src="../assets/kaniPlush.png" class="plush">
+        </div>
+        <div class="plush-wrapper" style="left: 45%; top: 40%; z-index: 1;">
+            <img src="../assets/rakkoPlush.png" class="plush">
+        </div>
+        <div class="plush-wrapper" style="left: 55%; top: 50%; z-index: 3;">
+            <img src="../assets/momongaPlush.png" class="plush">
+        </div>
+        
+        <div class="plush-wrapper" style="left: 5%; top: 60%; z-index: 4;">
+            <img src="../assets/usagiPlush.png" class="plush">
+        </div>
+        <div class="plush-wrapper" style="left: 30%; top: 55%; z-index: 5;">
+            <img src="../assets/chiikawaPlush.png" class="plush">
+        </div>
+        <div class="plush-wrapper" style="left: 42%; top: 52%; z-index: 2;">
+            <img src="../assets/shisaPlush.png" class="plush">
+        </div>
+        <div class="plush-wrapper" style="left: 60%; top: 60%; z-index: 4;">
+            <img src="../assets/chiikabuPlush.png" class="plush">
+        </div>
+        <div class="plush-wrapper" style="left: 75%; top: 55%; z-index: 5;">
+            <img src="../assets/hachiwarePlush.png" class="plush">
+        </div>
+      </div>
     </div>
 
-    <script src="clawmachine.js"></script>
+    <img src="../assets/machPic.png" class="layer-front" alt="Machine Frame">
+
+    <div class="controls-layer">
+      
+      <div class="timer-box">
+        <span id="timer-text">10</span>
+      </div>
+
+      <div class="play-btn-container" id="playBtn">
+        <span id="play-text">PLAY</span>
+      </div>
+
+      <div class="arrows-wrapper">
+        <img src="../assets/leftButton.png" id="btnLeft" class="nav-btn">
+        <img src="../assets/rightButton.png" id="btnRight" class="nav-btn">
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="clawmachine.js"></script>
 </body>
 </html>
