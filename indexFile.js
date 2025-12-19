@@ -60,11 +60,11 @@ bonusLetter.addEventListener("click", function(event)
 {
     if(replacePng)
     {
-        image.src = "assests/photoOfMe.png"
+        image.src = "assets/photoOfMe.png"
     }
     else
     {
-        image.src = "assests/chiksomething.png"
+        image.src = "assets/chiksomething.png"
     }
     replacePng = !replacePng;
 });

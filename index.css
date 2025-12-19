@@ -305,7 +305,7 @@ footer {
 }
 
 .friends-img {
-    width: 100%;
+    width: 350px;
     max-width: 350px;
     height: auto;
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
@@ -457,7 +457,7 @@ footer {
 
 html, body {
    
-    cursor: url('assests/cursorMomonga.png'), auto;
+    cursor: url('assets/cursorMomonga.png'), auto;
 }
 
 a, 
@@ -468,5 +468,5 @@ button,
 .menu-buttons a,
 .char-card, 
 .currency-container {
-    cursor: url('assests/cursorMomonga2.png'), pointer;
+    cursor: url('assets/cursorMomonga2.png'), pointer;
 }
