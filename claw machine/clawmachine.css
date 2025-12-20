@@ -1,207 +1,199 @@
-
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #ffeef2; 
-  font-family: 'Varela Round', sans-serif;
-  overflow: hidden;
+:root {
+    --kawaii-pink: #ffb7ce;
+    --kawaii-dark: #6b446e;
+    --kawaii-yellow: #fff385;
+    --soft-white: #fff9fb;
+    --accent-blue: #a2d2ff;
 }
 
-.machine-wrapper {
-  position: relative;
-  width: 1000px;
-  height: 700px;
+body, html {
+    margin: 0; padding: 0;
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+    font-family: 'Fredoka One', cursive;
+    user-select: none;
 }
 
-
-.layer-back {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 1;
-  object-fit: contain;
+.game-viewport {
+    position: relative;
+    width: 100vw; height: 100vh;
+    display: flex; justify-content: center; align-items: center;
 }
 
-.game-area {
-  position: absolute;
-  top: 15%; 
-  left: 36%; 
-  width: 45%; 
-  height: 48%; 
-  z-index: 5; 
-  overflow: hidden; 
+.main-bg-image {
+    position: absolute; inset: 0;
+    background-image: url('../assets/clawBack.png');
+    background-size: cover; background-position: center;
+    z-index: 0;
 }
 
-.layer-front {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 10;
-  pointer-events: none;
-  object-fit: contain;
+.machine-container {
+    position: relative;
+    width: 90vw; height: 90vh;
+    max-width: 1100px;
+    aspect-ratio: 16/9;
+    z-index: 1;
 }
 
-.controls-layer {
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 20;
-  pointer-events: none;
-}
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.mach-front { z-index: 100; }
+.mach-back { z-index: 1; }
 
-
-#claw-system {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  width: 90px; 
-  height: auto;
-  transform: translateX(-50%);
-  z-index: 100;
-  pointer-events: auto;
-}
-
-.cable {
-  width: 5px;
-  height: 500px;
-  background: linear-gradient(to right, #ccc, #999);
-  margin: 0 auto;
-  position: absolute;
-  bottom: 50px; 
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.claw-body {
-  position: relative;
-  width: 100%;
-  height: 50px;
-}
-
-.claw-knuckle {
-  width: 40px;
-  height: 40px;
-  background: white;
-  border: 4px solid #ff9db3;
-  border-radius: 50%;
-  margin: 0 auto;
-  box-shadow: 0 3px 0 rgba(0,0,0,0.1);
-  position: relative;
-  z-index: 2;
-}
-
-.claw-fingers {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  position: absolute;
-  top: 20px;
-}
-
-.finger {
-  width: 15px;
-  height: 65px; 
-  background: white;
-  border: 4px solid #ff9db3;
-  border-radius: 0 0 10px 10px;
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.finger-left { transform: rotate(25deg); transform-origin: top right; }
-.finger-right { transform: rotate(-25deg); transform-origin: top left; }
-
-
-#claw-system.grabbing .finger-left { transform: rotate(5deg); }
-#claw-system.grabbing .finger-right { transform: rotate(-5deg); }
-
-
-.plush-wrapper {
-  position: absolute;
-  width: 200px; /* SOSOSO MUCH BIGGER */
-  height: 200px;
-  pointer-events: none; 
+.inner-display {
+    position: absolute;
+    top: 15%; left: 32%; right: 8%; bottom: 22%;
+    z-index: 5; overflow: hidden;
 }
 
 .plush {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); 
+    position: absolute;
+    width: 22%;
+    height: auto;
+    filter: drop-shadow(4px 4px 6px rgba(0,0,0,0.2));
+    transition: top 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), 
+                left 0.8s ease, 
+                transform 0.8s ease;
 }
 
-
-#claw-system .plush-wrapper {
-  position: absolute;
-  top: 40px; 
-  left: 50%;
-  transform: translateX(-50%) scale(0.9); 
-  z-index: 1;
+.ui-panel {
+    position: absolute; bottom: 6%; left: 32%; right: 8%; height: 14%; z-index: 110;
 }
 
-
-
-.timer-box {
-  position: absolute;
-  bottom: 15%;
-  left: 38%;
-  background: black;
-  color: #00ffcc;
-  font-family: monospace;
-  font-size: 26px;
-  padding: 8px 18px;
-  border-radius: 8px;
-  pointer-events: auto;
-  box-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
+.controls-wrapper {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 30px; height: 100%; pointer-events: all;
 }
 
-
-.play-btn-container {
-  position: absolute;
-  bottom: 14%;
-  left: 48%;
-  width: 160px;
-  height: 65px;
-  background-image: url('../assets/darkButton.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.1s;
+.shifted-up { 
+    transform: translate(32px, 2px);
 }
 
-.play-btn-container:active {
-  transform: scale(0.95);
+.dark-button-container {
+    position: relative; width: 320px; height: 85px; display: flex; align-items: center;
 }
 
-#play-text {
-  color: white;
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  margin-top: -2px; 
+.dark-btn-bg { position: absolute; width: 100%; height: 100%; object-fit: contain; }
+.timer-area { position: relative; width: 100px; text-align: center; z-index: 2; margin-left: 12px; }
+#timerVal { font-size: 38px; color: #00ff88; text-shadow: 0 0 10px rgba(0,255,136,0.6); }
+
+.play-btn-overlay {
+    position: relative; flex: 1; background: none; border: none;
+    color: white; font-family: 'Fredoka One'; font-size: 30px;
+    cursor: pointer; z-index: 2; margin-right: 15px;
 }
 
-.arrows-wrapper {
-  position: absolute;
-  bottom: 14%;
-  right: 15%;
-  display: flex;
-  gap: 15px;
-  pointer-events: auto;
+.nav-group { display: flex; gap: 20px; }
+.nav-btn { background: none; border: none; cursor: pointer; padding: 0; transition: transform 0.2s; }
+.nav-btn img { width: 100px; height: auto; }
+
+.popup-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    z-index: 2000; display: none; justify-content: center; align-items: center;
+    backdrop-filter: blur(8px);
 }
 
-.nav-btn {
-  width: 65px;
-  height: 65px;
-  cursor: pointer;
-  transition: transform 0.1s;
+.popup-content {
+    background: var(--soft-white); padding: 45px 35px; border-radius: 60px;
+    border: 12px solid var(--kawaii-pink); box-shadow: 0 20px 0 #e8a5bc, 0 0 60px rgba(255, 183, 206, 0.5);
+    position: relative; text-align: center; width: 85%; max-width: 440px;
+    overflow: visible;
 }
-.nav-btn:active { transform: scale(0.9); }
+
+.prize-bounce {
+    animation: prizePop 1.2s infinite ease-in-out alternate;
+}
+
+@keyframes prizePop {
+    0% { transform: scale(1) rotate(-3deg); }
+    100% { transform: scale(1.1) rotate(3deg); }
+}
+
+#prizeDisplay img {
+    width: 170px;
+    height: auto;
+    margin-top: 15px;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
+}
+
+.animated-card {
+    background: white; border-radius: 40px; padding: 25px; margin: 25px 0;
+    border: 6px dashed var(--kawaii-pink);
+    position: relative;
+    animation: cardFloat 3s infinite ease-in-out;
+    background: linear-gradient(145deg, #ffffff, #fff5f8);
+    box-shadow: inset 0 0 20px rgba(255, 183, 206, 0.1);
+}
+
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+.card-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 8px;}
+#charName { 
+    color: var(--kawaii-dark); 
+    font-size: 34px; 
+    margin: 0;
+    text-shadow: 2px 2px 0px rgba(255, 183, 206, 0.3);
+}
+
+#charTrivia { 
+    font-family: 'Gaegu'; 
+    font-size: 26px; 
+    color: #444; 
+    line-height: 1.2; 
+    margin: 0; 
+    font-weight: 700;
+}
+
+.sparkle {
+    font-size: 24px;
+    animation: sparkleSpin 2s infinite linear;
+}
+
+@keyframes sparkleSpin {
+    0% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.3) rotate(180deg); opacity: 0.7; }
+    100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+
+.card-footer-sparkles {
+    margin-top: 15px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    opacity: 0.8;
+}
+
+.ribbon {
+    position: absolute; top: -35px; left: 50%; transform: translateX(-50%);
+    background: #ff85a1; color: white; padding: 14px 50px; border-radius: 25px;
+    font-size: 28px; box-shadow: 0 6px 0 #d65a78; white-space: nowrap;
+    z-index: 10;
+}
+
+.close-btn {
+    background: var(--kawaii-pink); border: none; padding: 18px 60px; border-radius: 40px;
+    color: white; font-family: 'Fredoka One'; font-size: 24px; cursor: pointer; 
+    box-shadow: 0 8px 0 #e8a5bc;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.close-btn:hover {
+    transform: translateY(2px);
+    box-shadow: 0 6px 0 #e8a5bc;
+}
+
+.claw-carriage { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100px; z-index: 10; }
+.claw-cable { position: absolute; top: -1000px; left: 50%; width: 6px; height: 1000px; background: #bbb; transform: translateX(-50%); }
+.claw-assembly { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; }
+.claw-base { width: 44px; height: 32px; background: #eee; border-radius: 50% 50% 20% 20%; margin: 0 auto; position: relative; z-index: 2; border: 2px solid #ccc; }
+.claw-arm { position: absolute; top: 18px; width: 14px; height: 62px; background: #fff; border: 3px solid #ddd; border-radius: 12px; transition: transform 0.8s; }
+.left-arm { left: 14px; transform-origin: top right; transform: rotate(42deg); }
+.right-arm { right: 14px; transform-origin: top left; transform: rotate(-42deg); }
+.center-arm { left: 33px; transform-origin: top center; transform: translateY(5px) rotateX(45deg); opacity: 0.6; }
+
+.grabbing .left-arm { transform: rotate(10deg) translateY(2px); }
+.grabbing .right-arm { transform: rotate(-10deg) translateY(2px); }
+.grabbing .center-arm { transform: translateY(8px) rotateX(5deg); opacity: 1; }
