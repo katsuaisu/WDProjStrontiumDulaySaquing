@@ -3,7 +3,9 @@
     --kawaii-dark: #6b446e;
     --kawaii-yellow: #fff385;
     --soft-white: #fff9fb;
-    --accent-blue: #a2d2ff;
+    --claw-main: #ffffff;
+    --claw-accent: #ff9eb5;
+    --claw-shadow: rgba(255, 158, 181, 0.5);
 }
 
 body, html {
@@ -11,7 +13,7 @@ body, html {
     width: 100vw; height: 100vh;
     overflow: hidden;
     font-family: 'Fredoka One', cursive;
-    user-select: none;
+    background: #fdf0f5;
 }
 
 .game-viewport {
@@ -35,7 +37,11 @@ body, html {
     z-index: 1;
 }
 
-.layer { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.layer { position: absolute; 
+    inset: 0; 
+    width: 100%; 
+    height: 100%; 
+    pointer-events: none; }
 .mach-front { z-index: 100; }
 .mach-back { z-index: 1; }
 
@@ -47,153 +53,175 @@ body, html {
 
 .plush {
     position: absolute;
-    width: 22%;
+    width: 20%;
     height: auto;
-    filter: drop-shadow(4px 4px 6px rgba(0,0,0,0.2));
-    transition: top 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), 
-                left 0.8s ease, 
-                transform 0.8s ease;
+    filter: drop-shadow(4px 4px 6px rgba(0,0,0,0.15));
 }
 
 .ui-panel {
-    position: absolute; bottom: 6%; left: 32%; right: 8%; height: 14%; z-index: 110;
+    position: absolute; bottom: 5%; left: 32%; right: 8%; height: 16%; z-index: 110;
 }
 
 .controls-wrapper {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 30px; height: 100%; pointer-events: all;
+    height: 100%; pointer-events: all; padding: 0 40px;
 }
 
-.shifted-up { 
-    transform: translate(32px, 2px);
+.joystick-area {
+    position: relative; width: 100px; height: 100px; margin-right: 20px;
 }
 
-.dark-button-container {
-    position: relative; width: 320px; height: 85px; display: flex; align-items: center;
+.joystick {
+    background: radial-gradient(at 75% 75%, #ffffff 0%, #ffcbdc 100%);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1), inset 0 -5px 5px rgba(0,0,0,0.05);
+    position: relative; height: 80px; width: 80px; border-radius: 50%;
 }
 
+.joystick__ball {
+    background: #ffe4ee;
+    position: absolute; height: 70%; width: 70%; border-radius: 50%;
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.joystick__stick {
+    background: radial-gradient(at 30% 30%, #ff89b4 0%, #ff4785 100%);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 2px 2px 5px rgba(255,255,255,0.4);
+    position: absolute; z-index: 10; height: 40px; width: 40px; border-radius: 50%;
+    top: 50%; left: 50%; margin: -20px -20px;
+    cursor: grab; transition: transform 0.1s ease-out;
+}
+
+.joystick__stick:active { cursor: grabbing; }
+
+.dark-button-container { position: relative; width: 280px; height: 75px; display: flex; align-items: center; }
 .dark-btn-bg { position: absolute; width: 100%; height: 100%; object-fit: contain; }
-.timer-area { position: relative; width: 100px; text-align: center; z-index: 2; margin-left: 12px; }
-#timerVal { font-size: 38px; color: #00ff88; text-shadow: 0 0 10px rgba(0,255,136,0.6); }
-
+.timer-area { position: relative; width: 80px; text-align: center; z-index: 2; margin-left: 10px; }
+#timerVal { font-size: 34px; color: #00ff88; text-shadow: 0 0 8px rgba(0,255,136,0.5); }
 .play-btn-overlay {
     position: relative; flex: 1; background: none; border: none;
-    color: white; font-family: 'Fredoka One'; font-size: 30px;
+    color: white; font-family: 'Fredoka One'; font-size: 26px;
     cursor: pointer; z-index: 2; margin-right: 15px;
 }
 
-.nav-group { display: flex; gap: 20px; }
-.nav-btn { background: none; border: none; cursor: pointer; padding: 0; transition: transform 0.2s; }
-.nav-btn img { width: 100px; height: auto; }
-
 .popup-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    position: fixed; inset: 0; background: rgba(107, 68, 110, 0.4);
     z-index: 2000; display: none; justify-content: center; align-items: center;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px); perspective: 1000px;
 }
 
 .popup-content {
-    background: var(--soft-white); padding: 45px 35px; border-radius: 60px;
-    border: 12px solid var(--kawaii-pink); box-shadow: 0 20px 0 #e8a5bc, 0 0 60px rgba(255, 183, 206, 0.5);
-    position: relative; text-align: center; width: 85%; max-width: 440px;
-    overflow: visible;
+    display: flex; flex-direction: column; align-items: center;
+    transform-style: preserve-3d;
 }
 
-.prize-bounce {
-    animation: prizePop 1.2s infinite ease-in-out alternate;
-}
-
-@keyframes prizePop {
-    0% { transform: scale(1) rotate(-3deg); }
-    100% { transform: scale(1.1) rotate(3deg); }
-}
-
-#prizeDisplay img {
-    width: 170px;
-    height: auto;
-    margin-top: 15px;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
-}
-
-.animated-card {
-    background: white; border-radius: 40px; padding: 25px; margin: 25px 0;
-    border: 6px dashed var(--kawaii-pink);
+.poke-card-wrapper {
     position: relative;
-    animation: cardFloat 3s infinite ease-in-out;
-    background: linear-gradient(145deg, #ffffff, #fff5f8);
-    box-shadow: inset 0 0 20px rgba(255, 183, 206, 0.1);
+    padding: 12px; 
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    border-radius: 20px; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    width: 280px; 
+    border: 4px solid white;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
 }
 
-@keyframes cardFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(1deg); }
+.trivia-card { 
+    background: white; border-radius: 12px; overflow: hidden; position: relative; 
+    transform: translateZ(20px);
 }
 
-.card-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 8px;}
-#charName { 
-    color: var(--kawaii-dark); 
-    font-size: 34px; 
-    margin: 0;
-    text-shadow: 2px 2px 0px rgba(255, 183, 206, 0.3);
+.card-shine {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(125deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.4) 47%, rgba(255,255,255,0) 50%);
+    pointer-events: none; z-index: 10;
 }
 
-#charTrivia { 
-    font-family: 'Gaegu'; 
-    font-size: 26px; 
-    color: #444; 
-    line-height: 1.2; 
-    margin: 0; 
-    font-weight: 700;
-}
-
-.sparkle {
-    font-size: 24px;
-    animation: sparkleSpin 2s infinite linear;
-}
-
-@keyframes sparkleSpin {
-    0% { transform: scale(1) rotate(0deg); opacity: 1; }
-    50% { transform: scale(1.3) rotate(180deg); opacity: 0.7; }
-    100% { transform: scale(1) rotate(360deg); opacity: 1; }
-}
-
-.card-footer-sparkles {
-    margin-top: 15px;
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    opacity: 0.8;
-}
+.card-inner-border { border: 6px solid var(--kawaii-yellow); margin: 6px; border-radius: 6px; padding-bottom: 10px; }
+.card-header { display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #eee; }
+#charName { color: var(--kawaii-dark); font-size: 18px; margin: 0; }
+.hp-tag { color: #ff5555; font-size: 12px; font-weight: bold; }
+#prizeDisplay { height: 160px; display: flex; justify-content: center; align-items: center; background: #fffcf2; }
+#prizeDisplay img { width: 110px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
+.trivia-text-container { padding: 10px; min-height: 70px; text-align: center; }
+#charTrivia { font-family: 'Gaegu'; font-size: 15px; color: #555; margin: 0; font-weight: 700; }
+.card-footer-sparkles { display: flex; justify-content: space-between; padding: 5px 15px; font-size: 10px; color: #aaa; }
 
 .ribbon {
-    position: absolute; top: -35px; left: 50%; transform: translateX(-50%);
-    background: #ff85a1; color: white; padding: 14px 50px; border-radius: 25px;
-    font-size: 28px; box-shadow: 0 6px 0 #d65a78; white-space: nowrap;
-    z-index: 10;
+    background: #ff4757; color: white; padding: 6px 30px; border-radius: 50px;
+    font-size: 22px; position: absolute; top: -40px; z-index: 100; border: 3px solid white;
+    transform: translateZ(40px); box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .close-btn {
-    background: var(--kawaii-pink); border: none; padding: 18px 60px; border-radius: 40px;
-    color: white; font-family: 'Fredoka One'; font-size: 24px; cursor: pointer; 
-    box-shadow: 0 8px 0 #e8a5bc;
-    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 30px; background: #2ed573; border: 3px solid white; padding: 10px 40px;
+    border-radius: 30px; color: white; font-family: 'Fredoka One'; font-size: 18px; cursor: pointer;
+    box-shadow: 0 5px 15px rgba(46, 213, 115, 0.4); transform: translateZ(10px);
 }
 
-.close-btn:hover {
-    transform: translateY(2px);
-    box-shadow: 0 6px 0 #e8a5bc;
+
+.claw-carriage { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; z-index: 10; }
+.claw-cable { position: absolute; top: -995px; left: 50%; width: 8px; height: 1000px; background: var(--claw-main); border: 2px solid var(--claw-accent); transform: translateX(-50%); }
+.claw-assembly { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; display: flex; justify-content: center; }
+
+.machine__crane-claw {
+    position: relative; top: 5px; width: 6em; height: 7em; font-size: 14px;
+  
+    background: 
+        radial-gradient(circle at 50% 60%, var(--claw-main) 30%, var(--claw-accent) 35%),
+        linear-gradient(to bottom, var(--claw-accent) 10%, var(--claw-main) 10%, var(--claw-main) 40%, var(--claw-accent) 40%);
+    background-repeat: no-repeat;
+    background-size: 100% 3em, 2em 4em;
+    background-position: 0 3.5em, center 0;
+    transform-origin: 50% 0;
+    filter: drop-shadow(0 4px 6px var(--claw-shadow));
 }
 
-.claw-carriage { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100px; z-index: 10; }
-.claw-cable { position: absolute; top: -1000px; left: 50%; width: 6px; height: 1000px; background: #bbb; transform: translateX(-50%); }
-.claw-assembly { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; }
-.claw-base { width: 44px; height: 32px; background: #eee; border-radius: 50% 50% 20% 20%; margin: 0 auto; position: relative; z-index: 2; border: 2px solid #ccc; }
-.claw-arm { position: absolute; top: 18px; width: 14px; height: 62px; background: #fff; border: 3px solid #ddd; border-radius: 12px; transition: transform 0.8s; }
-.left-arm { left: 14px; transform-origin: top right; transform: rotate(42deg); }
-.right-arm { right: 14px; transform-origin: top left; transform: rotate(-42deg); }
-.center-arm { left: 33px; transform-origin: top center; transform: translateY(5px) rotateX(45deg); opacity: 0.6; }
+.machine__crane-finger {
+    color: var(--claw-accent); 
+    position: absolute; top: 5em; width: 2.5em; height: 4em; 
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    filter: drop-shadow(0 2px 3px var(--claw-shadow));
+    z-index: 1;
+}
 
-.grabbing .left-arm { transform: rotate(10deg) translateY(2px); }
-.grabbing .right-arm { transform: rotate(-10deg) translateY(2px); }
-.grabbing .center-arm { transform: translateY(8px) rotateX(5deg); opacity: 1; }
+
+.machine__crane-finger:nth-child(2), 
+.machine__crane-finger:nth-child(4) { 
+    border-top: 0.8em solid var(--claw-accent);
+    border-bottom: 3px solid rgba(255,255,255,0.5);
+    height: 1em;
+    top: 4.5em;
+}
+
+.machine__crane-finger.left {
+    border-radius: 100% 0 0 100% / 40% 0 0 50%; 
+    border-left: 1em solid; 
+    left: -0.5em;
+    transform: rotate(30deg); transform-origin: 100% 0;
+    background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0));
+}
+
+
+.machine__crane-finger.middle {
+    background: var(--claw-main);
+    border: 3px solid var(--claw-accent);
+    border-radius: 50%;
+    left: calc(50% - 0.75em); width: 1.5em; height: 1.5em;
+    top: 4em;
+    z-index: 10;
+    box-shadow: inset 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+.machine__crane-finger.right {
+    border-radius: 0 100% 100% 0 / 0 40% 50% 0; 
+    border-right: 1em solid; 
+    right: -0.5em;
+    transform: rotate(-30deg); transform-origin: 0 0;
+    background: linear-gradient(to left, rgba(255,255,255,0.8), rgba(255,255,255,0));
+}
+
+
+.grabbing .machine__crane-finger.left { transform: rotate(5deg); }
+.grabbing .machine__crane-finger.right { transform: rotate(-5deg); }

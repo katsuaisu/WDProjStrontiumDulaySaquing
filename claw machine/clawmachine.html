@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kawaii Claw Machine</title>
+    <title>Save The Chiikaw-lings!</title>
     <link rel="stylesheet" href="clawmachine.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -12,23 +12,28 @@
         <div class="main-bg-image"></div>
 
         <div id="winPopup" class="popup-overlay">
-            <div class="popup-content">
-                <div class="ribbon">NEW FRIEND!</div>
-                <div id="prizeDisplay" class="prize-bounce"></div>
-                <div class="trivia-card animated-card">
-                    <div class="card-header">
-                        <span class="sparkle">✨</span>
-                        <h3 id="charName">NAME</h3>
-                        <span class="sparkle">✨</span>
-                    </div>
-                    <div class="trivia-text-container">
-                        <p id="charTrivia">Trivia goes here!</p>
-                    </div>
-                    <div class="card-footer-sparkles">
-                        <span>🌸</span><span>⭐️</span><span>🎀</span>
+            <div class="popup-content" id="popupContent">
+                <div class="ribbon">GOTCHA!</div>
+                <div class="poke-card-wrapper" id="cardWrapper">
+                    <div class="trivia-card">
+                        <div class="card-inner-border">
+                            <div class="card-header">
+                                <h3 id="charName">NAME</h3>
+                                <div class="hp-tag">HP 100</div>
+                            </div>
+                            <div id="prizeDisplay"></div>
+                            <div class="trivia-text-container">
+                                <p id="charTrivia"></p>
+                            </div>
+                            <div class="card-footer-sparkles">
+                                <span>type: baby</span>
+                                <span>⭐️⭐️⭐️</span>
+                            </div>
+                        </div>
+                        <div class="card-shine"></div>
                     </div>
                 </div>
-                <button onclick="closePopup()" class="close-btn">TAKE HOME</button>
+                <button onclick="closePopup()" class="close-btn">KEEP!</button>
             </div>
         </div>
 
@@ -37,24 +42,27 @@
             
             <div class="inner-display">
                 <div class="plushie-shelf" id="plushieShelf">
-                    <img src="../assets/anokoPlush.png" data-name="Anoko" class="plush" style="top: 65%; left: 8%; transform: rotate(85deg);">
-                    <img src="../assets/kaniPlush.png" data-name="Kani" class="plush" style="top: 70%; left: 22%; transform: rotate(-95deg);">
-                    <img src="../assets/usagiPlush.png" data-name="Usagi" class="plush" style="top: 68%; left: 38%; transform: rotate(100deg);">
-                    <img src="../assets/momongaPlush.png" data-name="Momonga" class="plush" style="top: 65%; left: 55%; transform: rotate(-80deg);">
-                    <img src="../assets/shisaPlush.png" data-name="Shisa" class="plush" style="top: 72%; left: 70%; transform: rotate(75deg);">
+                    <img src="../assets/anokoPlush.png" data-name="Anoko" class="plush" style="top: 65%; left: 5%; transform: rotate(85deg);">
+                    <img src="../assets/kaniPlush.png" data-name="Kani" class="plush" style="top: 70%; left: 18%; transform: rotate(-95deg);">
+                    <img src="../assets/usagiPlush.png" data-name="Usagi" class="plush" style="top: 68%; left: 32%; transform: rotate(100deg);">
+                    <img src="../assets/momongaPlush.png" data-name="Momonga" class="plush" style="top: 65%; left: 45%; transform: rotate(-80deg);">
+                    <img src="../assets/shisaPlush.png" data-name="Shisa" class="plush" style="top: 72%; left: 58%; transform: rotate(75deg);">
                     <img src="../assets/chiikawaPlush.png" data-name="Chiikawa" class="plush" style="top: 45%; left: 15%; transform: rotate(-10deg);">
-                    <img src="../assets/hachiwarePlush.png" data-name="Hachiware" class="plush" style="top: 48%; left: 45%; transform: rotate(15deg);">
-                    <img src="../assets/kurimanjuPlush.png" data-name="Kurimanju" class="plush" style="top: 46%; left: 75%; transform: rotate(-5deg);">
+                    <img src="../assets/hachiwarePlush.png" data-name="Hachiware" class="plush" style="top: 48%; left: 40%; transform: rotate(15deg);">
+                    <img src="../assets/kurimanjuPlush.png" data-name="Kurimanju" class="plush" style="top: 46%; left: 65%; transform: rotate(-5deg);">
+                    <img src="../assets/chiikabuPlush.png" data-name="Chiikabu" class="plush" style="top: 68%; left: 82%; transform: rotate(10deg);">
                 </div>
 
                 <div class="claw-rail">
                     <div class="claw-carriage" id="clawCarriage">
                         <div class="claw-cable" id="clawCable"></div>
                         <div class="claw-assembly" id="clawAssembly">
-                            <div class="claw-base"></div>
-                            <div class="claw-arm left-arm"></div>
-                            <div class="claw-arm right-arm"></div>
-                            <div class="claw-arm center-arm"></div>
+                            <div class="machine__crane-claw">
+                                <div class="machine__crane-palm"></div>
+                                <div class="machine__crane-finger left"></div>
+                                <div class="machine__crane-finger middle"></div>
+                                <div class="machine__crane-finger right"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,9 +80,11 @@
                         </div>
                     </div>
 
-                    <div class="nav-group">
-                        <button class="nav-btn" id="leftBtn"><img src="../assets/leftButton.png"></button>
-                        <button class="nav-btn" id="rightBtn"><img src="../assets/rightButton.png"></button>
+                    <div class="joystick-area">
+                        <div class="joystick" id="joystickBase">
+                            <div class="joystick__ball"></div>
+                            <div class="joystick__stick" id="joystickKnob"></div>
+                        </div>
                     </div>
                 </div>
             </div>
