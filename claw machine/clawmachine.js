@@ -8,7 +8,6 @@ const prizeDisplay = document.getElementById('prizeDisplay');
 const joystickKnob = document.getElementById('joystickKnob');
 const clawBody = document.querySelector('.machine__crane-claw');
 const cardWrapper = document.getElementById('cardWrapper');
-const popupOverlay = document.getElementById('winPopup');
 
 const triviaData = {
     "Chiikawa": "Chiikawa (ちいかわ) is the titular character and protagonist of the manga and anime series. They are best friends with Hachiware and Usagi, and spends much of their time hanging out together.",
@@ -28,26 +27,20 @@ let timeLeft = 10;
 let timerId = null;
 let isHolding = false;
 let caughtPlushie = null;
-
 let isJoystickTouching = false;
 const maxJoystickDelta = 25;
 
 function handleJoystick(e) {
     if (state !== 'playing' || !isJoystickTouching) return;
-    
     const rect = document.getElementById('joystickBase').getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    
     let deltaX = clientX - centerX;
     deltaX = Math.max(-maxJoystickDelta, Math.min(maxJoystickDelta, deltaX));
-    
     joystickKnob.style.transform = `translate(${deltaX}px, 0)`;
-    
     const moveSpeed = 0.6;
-    if (deltaX > 5 && posX < 98) posX += moveSpeed;
-    if (deltaX < -5 && posX > 2) posX -= moveSpeed;
-    
+    if (deltaX > 5 && posX < 92) posX += moveSpeed;
+    if (deltaX < -5 && posX > 8) posX -= moveSpeed;
     carriage.style.left = posX + '%';
 }
 
@@ -70,17 +63,14 @@ window.ontouchend = () => {
 
 function handleCardTilt(e) {
     if (winPopup.style.display !== 'flex') return;
-    
     const rect = cardWrapper.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    
+    if (!e.clientX) return;
     const mouseX = e.clientX - centerX;
     const mouseY = e.clientY - centerY;
-    
     const rotateY = (mouseX / (window.innerWidth / 2)) * 20;
     const rotateX = -(mouseY / (window.innerHeight / 2)) * 20;
-
     cardWrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 }
 
@@ -98,42 +88,37 @@ function dropClaw() {
     if (state !== 'playing') return;
     state = 'dropping';
     clearInterval(timerId);
-    
-    assembly.style.transition = 'top 1.5s ease-in';
-    cable.style.transition = 'top 1.5s ease-in';
-    assembly.style.top = '310px';
-    cable.style.top = '-690px';
-
+    assembly.style.transition = 'top 1.5s cubic-bezier(0.45, 0.05, 0.55, 0.95)';
+    cable.style.transition = 'top 1.5s cubic-bezier(0.45, 0.05, 0.55, 0.95)';
+    assembly.style.top = '240px'; 
+    cable.style.top = '-760px';
     setTimeout(() => {
         clawBody.classList.add('grabbing');
         caughtPlushie = checkCollision();
-        
         setTimeout(() => {
             assembly.style.top = '0px';
             cable.style.top = '-1000px';
             state = 'returning';
-            
             setTimeout(() => {
-                carriage.style.transition = 'left 2s linear';
-                posX = -5;
+                carriage.style.transition = 'left 2s ease-in-out';
+                posX = 5; 
                 carriage.style.left = posX + '%';
-
                 let slipCheck = setInterval(() => {
-                    if (isHolding && Math.random() < 0.08) {
+                    if (isHolding && Math.random() < 0.06) {
                         isHolding = false;
                         clearInterval(slipCheck);
                         handleDropFail();
                     }
                 }, 400);
-
                 setTimeout(() => {
                     clearInterval(slipCheck);
                     clawBody.classList.remove('grabbing');
                     if (isHolding) {
                         isHolding = false;
                         const p = caughtPlushie;
-                        p.style.transition = 'top 0.8s ease-in';
-                        p.style.top = '150%';
+                        p.style.transition = 'top 0.8s ease-in, transform 0.8s';
+                        p.style.top = '120%'; 
+                        p.style.transform = 'rotate(360deg) scale(0.5)';
                         setTimeout(() => showWin(p), 800);
                     } else {
                         setTimeout(resetGame, 500);
@@ -150,21 +135,19 @@ function checkCollision() {
     document.querySelectorAll('.plush').forEach(p => {
         if (p.style.opacity === '0') return;
         const pRect = p.getBoundingClientRect();
-        const dist = Math.sqrt(
-            Math.pow((clawRect.left + clawRect.width/2) - (pRect.left + pRect.width/2), 2) +
-            Math.pow((clawRect.top + clawRect.height - 20) - (pRect.top + pRect.height/2), 2)
-        );
-        if (dist < 60) target = p;
+        const dx = (clawRect.left + clawRect.width/2) - (pRect.left + pRect.width/2);
+        const dy = (clawRect.bottom - 10) - (pRect.top + pRect.height/2);
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 110) target = p;
     });
-
     if (target) {
         isHolding = true;
-        const shelf = document.getElementById('plushieShelf').getBoundingClientRect();
+        const chamber = document.querySelector('.chamber-interior').getBoundingClientRect();
         const follow = () => {
             if (isHolding) {
                 const c = assembly.getBoundingClientRect();
-                target.style.left = (c.left - shelf.left + 25) + 'px';
-                target.style.top = (c.top - shelf.top + 45) + 'px';
+                target.style.left = (c.left - chamber.left + -15) + 'px';
+                target.style.top = (c.top - chamber.top + 50) + 'px';
                 requestAnimationFrame(follow);
             }
         };
@@ -179,7 +162,7 @@ function handleDropFail() {
     const p = caughtPlushie;
     p.style.transition = 'top 0.5s ease-in, left 0.5s ease-out';
     p.style.top = '70%';
-    p.style.left = (35 + Math.random() * 40) + '%';
+    p.style.left = (20 + Math.random() * 60) + '%';
     setTimeout(resetGame, 600);
 }
 
@@ -207,8 +190,17 @@ function resetGame() {
 }
 
 playBtn.onclick = () => {
-    if (state === 'idle') { state = 'playing'; playBtn.innerText = 'DROP!'; startTimer(); }
-    else if (state === 'playing') dropClaw();
+    if (state === 'idle') { 
+        state = 'playing'; 
+        playBtn.innerText = 'DROP!'; 
+        startTimer(); 
+    }
+    else if (state === 'playing') {
+        dropClaw();
+    }
 };
 
-function closePopup() { winPopup.style.display = 'none'; resetGame(); }
+function closePopup() { 
+    winPopup.style.display = 'none'; 
+    resetGame(); 
+}

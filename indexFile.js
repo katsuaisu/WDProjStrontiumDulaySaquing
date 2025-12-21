@@ -46,8 +46,9 @@ el.animate([{opacity:0,transform:`translate(0px,0px)scale(1)`},{opacity:rnd(0.5,
 }
 })();
 
+const logo = document.getElementById("logo");
 logo.style.position = "absolute";
-logo.style.top = "20x";
+logo.style.top = "20px";
 logo.style.right = "20px";
 logo.style.width = "100px";
 
@@ -69,11 +70,7 @@ bonusLetter.addEventListener("click", function(event)
     replacePng = !replacePng;
 });
 
-// event listener is fun, its way easier to do event listener to change elements on the webpage
-
-
 document.addEventListener('DOMContentLoaded', () => {
-    
     document.querySelectorAll('button, a').forEach(el => {
         el.addEventListener('mouseenter', () => {
             el.style.cursor = "url('../assets/cursorMomonga2.png'), pointer";
@@ -83,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-  
     document.body.addEventListener('error', (e) => {
         if (e.target.tagName === 'IMG') {
             document.body.style.cursor = 'auto';

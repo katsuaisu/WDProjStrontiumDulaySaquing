@@ -1,0 +1,297 @@
+@font-face {
+    font-family: 'Kinkee';
+    src: url('../assets/fonts/KINKEE__.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --accent-pink: #ff9ecd;
+    --accent-blue: #a2d2ff;
+    --deep-pink: #ff1493;
+    --glow-shadow: 0 0 20px rgba(255, 158, 205, 0.6);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Kinkee', cursive;
+    overflow: hidden;
+    background-image: url('../assets/cutechii.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: url('../assets/cursorMomonga2.png'), auto;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,182,193,0.4) 100%);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+.bg-shapes .shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    z-index: 2;
+    opacity: 0.6;
+    animation: shapeFloat 10s infinite alternate;
+}
+
+.shape-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: var(--accent-pink); animation-duration: 12s; }
+.shape-2 { bottom: -10%; right: -10%; width: 400px; height: 400px; background: var(--accent-blue); animation-duration: 15s; }
+.shape-3 { top: 40%; left: 40%; width: 200px; height: 200px; background: #fff; animation-duration: 8s; }
+
+.about-container {
+    position: relative;
+    z-index: 10;
+    width: 90vw;
+    max-width: 1100px;
+    height: auto;
+    min-height: 60vh;
+    background: var(--glass-bg);
+    border-radius: 60px;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 20px 50px rgba(0,0,0,0.1),
+        inset 0 0 80px rgba(255, 255, 255, 0.8),
+        0 0 0 12px rgba(255, 255, 255, 0.3);
+    display: flex;
+    padding: 60px;
+    animation: containerEntrance 1s ease-out forwards, containerHover 6s ease-in-out infinite 1s;
+    backdrop-filter: blur(10px);
+}
+
+.about-inner {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 60px;
+}
+
+.about-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.friends-img {
+    width: 100%;
+    max-width: 420px;
+    display: block;
+    filter: drop-shadow(0 15px 15px rgba(162, 210, 255, 0.4));
+    animation: idleBob 4s ease-in-out infinite;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.friends-img:hover {
+    transform: scale(1.1) rotate(3deg) translateY(-10px);
+    filter: drop-shadow(0 0 30px var(--accent-pink)) brightness(1.1) saturate(1.2);
+}
+
+.about-right {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2 {
+    font-size: 6rem;
+    margin: 0 0 20px 0;
+    line-height: 0.85;
+    background: linear-gradient(180deg, #ffffff 20%, #ff9ecd 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 4px var(--deep-pink);
+    filter: drop-shadow(4px 4px 0px var(--accent-blue));
+    text-align: left;
+    animation: textPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.text-box p {
+    font-size: 1.8rem;
+    line-height: 1.4;
+    color: #555;
+    margin: 0;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeInText 1s ease-out 0.5s forwards;
+}
+
+.magic-name {
+    position: relative;
+    display: inline-block;
+    color: var(--deep-pink);
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0 12px;
+    border-radius: 20px;
+    border: 2px solid var(--accent-blue);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.magic-name:hover {
+    transform: translateY(-5px) scale(1.1);
+    background: var(--accent-pink);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+    border-color: #fff;
+}
+
+.close-btn {
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    width: 80px;
+    height: 80px;
+    background: #fff;
+    border-radius: 50%;
+    color: var(--deep-pink);
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 
+        0 10px 25px rgba(0,0,0,0.1),
+        inset 0 -5px 10px rgba(0,0,0,0.05);
+    border: 4px solid var(--accent-blue);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 20;
+    overflow: hidden;
+}
+
+.close-btn span {
+    z-index: 2;
+    transition: transform 0.4s ease;
+}
+
+.close-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-pink), var(--deep-pink));
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: 1;
+}
+
+.close-btn:hover {
+    transform: scale(1.15) rotate(15deg);
+    border-color: #fff;
+    color: #fff;
+    box-shadow: 0 0 30px var(--accent-pink);
+}
+
+.close-btn:hover::before {
+    transform: translateY(0);
+}
+
+.close-btn:hover span {
+    transform: rotate(90deg) scale(1.2);
+}
+
+.decor-star {
+    position: absolute;
+    font-size: 4rem;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.star-1 { top: -40px; left: -20px; color: #fff; text-shadow: 0 0 10px var(--accent-blue); animation: starTwinkle 3s infinite; }
+.star-2 { bottom: -30px; right: 40px; color: var(--accent-blue); text-shadow: 0 0 10px #fff; animation: starTwinkle 4s infinite 1s; }
+.star-3 { top: 50%; left: -50px; color: var(--accent-pink); font-size: 5rem; animation: rotateStar 10s linear infinite; }
+
+/* Animations */
+@keyframes idleBob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(1deg); }
+}
+
+@keyframes containerEntrance {
+    from { opacity: 0; transform: scale(0.8) translateY(50px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes containerHover {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes textPop {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInText {
+    to { opacity: 1; }
+}
+
+@keyframes shapeFloat {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+@keyframes starTwinkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.3) rotate(20deg); opacity: 0.6; }
+}
+
+@keyframes rotateStar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Rain Logic Styling */
+.falling-item {
+    position: fixed;
+    top: -150px;
+    z-index: 100;
+    pointer-events: none;
+    animation: fall linear forwards;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .about-inner {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .about-container {
+        height: auto;
+        padding: 40px 20px;
+        margin: 20px;
+    }
+
+    h2 { font-size: 4rem; text-align: center; }
+    .text-box p { font-size: 1.4rem; text-align: center; }
+    .friends-img { max-width: 250px; }
+    .close-btn { width: 60px; height: 60px; font-size: 1.8rem; top: -20px; right: -20px; }
+}

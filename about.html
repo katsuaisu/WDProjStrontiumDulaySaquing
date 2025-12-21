@@ -4,74 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>About - ChiikArcade</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="about.css">
 </head>
-
 <body class="about-page">
-
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
     <div class="overlay"></div>
-
     
     <div class="about-container">
-
-        <img src="assets/about_pink_frame.png" class="bg-frame" alt="Frame Background">
+        <div class="decor-star star-1">✦</div>
+        <div class="decor-star star-2">✦</div>
+        <div class="decor-star star-3">★</div>
         
-
         <div class="about-inner">
             <div class="about-left">
-                <img src="assets/chiikawa_and_friends.png" class="friends-img" alt="Chiikawa and Friends">
+                <img src="../assets/idklol.png" class="friends-img" alt="Cute Art">
             </div>
-            
             <div class="about-right">
-                <h2>ChiikArcade</h2>
-                <p>
-                    ChiikArcade is a lighthearted project based on the popular Japanese cartoon Chiikawa. 
-                    The developers, <span class="magic-name" id="unoTrigger">Uno D.</span> and <span class="magic-name" id="reiTrigger">Rei S.</span>, 
-                    aim to bring the whimsy of the series to life with a collection of arcade-style experiences.
-                    Through playful gameplay, ChiikArcade hopes to capture the same values, comfort, and charm that fans love.
-                </p>
+                <h2 class="title-anim">CHIIKARCADE</h2>
+                <div class="text-box">
+                    <p>
+                        ChiikArcade is a lighthearted project based on the popular Japanese cartoon Chiikawa. 
+                        The developers, <span class="magic-name" id="unoTrigger">Uno D.</span> and <span class="magic-name" id="reiTrigger">Rei S.</span>, 
+                        aim to bring the whimsy of the series to life with a collection of arcade-style experiences.
+                        Through playful gameplay, ChiikArcade hopes to capture the same values, comfort, and charm that fans love.
+                    </p>
+                </div>
             </div>
         </div>
-        
-       
-        <a href="index.html" class="close-btn">X</a>
+        <a href="index.html" class="close-btn">
+            <span>✖</span>
+        </a>
     </div>
-
-    <script>
-        const unoTrigger = document.getElementById('unoTrigger');
-        const reiTrigger = document.getElementById('reiTrigger');
-
-        function makeItRain(imageSrc) {
-          
-            for (let i = 0; i < 40; i++) {
-                setTimeout(() => {
-                    const drop = document.createElement('img');
-                    drop.src = imageSrc;
-                    drop.classList.add('falling-item'); 
-                    
-                  
-                    const startLeft = Math.random() * 95;
-                    const size = Math.random() * 80 + 50; 
-                    const duration = Math.random() * 1.5 + 1; 
-                    
-                    drop.style.left = startLeft + 'vw';
-                    drop.style.width = size + 'px';
-                    drop.style.animationDuration = duration + 's';
-                    
-                    document.body.appendChild(drop);
-                    
-                   
-                    setTimeout(() => { drop.remove(); }, duration * 1000);
-                }, i * 80);
-            }
-        }
-
-      
-        unoTrigger.addEventListener('click', () => { makeItRain('assets/uno_baby_pic.png'); });
-        reiTrigger.addEventListener('click', () => { makeItRain('assets/rei_baby_pic.png'); });
-    </script>
+    <script src="about.js"></script>
 </body>
 </html>

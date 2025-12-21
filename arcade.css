@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Kinkee';
+    src: url('../assets/fonts/KINKEE__.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --glass-bg: rgba(255, 255, 255, 0.45);
     --glass-border: rgba(255, 255, 255, 0.6);
@@ -7,8 +14,10 @@
     --pastel-yellow: #fdfd96;
     --pastel-green: #bcebc3;
     --pastel-purple: #e0cffc;
-    --pixel-font: 'Press Start 2P', cursive;
-    --main-font: 'Fredoka', sans-serif;
+    
+
+    --pixel-font: 'Kinkee', cursive; 
+    --main-font: 'Kinkee', cursive;
 }
 
 * {
@@ -25,6 +34,9 @@ body {
     background-color: #ffe4e1;
     position: relative;
     
+   
+    cursor: url('../assets/cursorMomonga2.png'), auto;
+
     background-image: 
         radial-gradient(white 15%, transparent 16%),
         radial-gradient(var(--pastel-yellow) 15%, transparent 16%);
@@ -32,7 +44,6 @@ body {
     background-position: 0 0, 30px 30px;
     animation: bgScroll 20s linear infinite;
 }
-
 
 body::before {
     content: '';
@@ -58,29 +69,73 @@ body::before {
 
 
 .header-title {
-    font-family: var(--pixel-font);
-    font-size: 3rem; 
-    color: #fff;
-    text-shadow: 
-        4px 4px 0 var(--pastel-pink),
-        8px 8px 0 var(--pastel-blue),
-        0 0 20px rgba(255, 255, 255, 0.8);
-    margin-bottom: 20px;
-    letter-spacing: 2px;
+    font-family: 'Kinkee', cursive;
+    font-size: 5rem; 
+    letter-spacing: 4px;
     z-index: 10;
     display: flex;
     align-items: center;
     gap: 20px;
     text-transform: uppercase;
-    animation: floatTitle 3s ease-in-out infinite, flicker 4s infinite;
+    margin-bottom: 20px;
+    
+
+    background: linear-gradient(
+        to bottom, 
+        #ffffff 0%, 
+        #ffffff 45%, 
+        #ffcde2 50%, 
+        #ff8fab 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+
+    -webkit-text-stroke: 3px #ff69b4; 
+    
+    filter: drop-shadow(4px 4px 0px #b19cd9) 
+            drop-shadow(8px 8px 0px rgba(255, 255, 255, 0.4));
+            
+    position: relative;
+    animation: floatTitle 3s ease-in-out infinite;
+}
+
+
+.header-title::after {
+    content: 'CHIIKARCADE';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(
+        120deg, 
+        transparent 30%, 
+        rgba(255,255,255, 0.9) 50%, 
+        transparent 70%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0;
+    animation: shineMove 3s linear infinite;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .star-decor {
-    font-size: 2rem;
+    font-size: 3rem;
     color: var(--pastel-yellow);
-    text-shadow: 2px 2px 0 #ffa07a;
+    -webkit-text-stroke: 2px #ff9ecd;
+    text-shadow: 4px 4px 0 #b19cd9;
     animation: spin 4s linear infinite;
 }
+
 
 
 .machine-shelf {
@@ -90,7 +145,6 @@ body::before {
     gap: 40px; 
     padding: 60px 80px;
     
-  
     background: 
         linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px),
@@ -108,7 +162,6 @@ body::before {
     perspective: 1000px;
 }
 
-
 .machine {
     position: relative;
     width: 160px;
@@ -119,17 +172,16 @@ body::before {
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncier transition */
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     box-shadow: 0 15px 0 rgba(0,0,0,0.05), 0 25px 25px var(--machine-shadow);
     border: 5px solid #fff;
     animation: idleBounce 3s infinite ease-in-out;
+    cursor: url('../assets/cursorMomonga2.png'), pointer;
 }
-
 
 .machine:nth-child(odd) {
     margin-bottom: 80px; 
 }
-
 
 .machine:nth-child(even) {
     margin-top: 80px;
@@ -141,14 +193,11 @@ body::before {
     box-shadow: 
         0 0 0 6px var(--pastel-yellow), 
         0 45px 50px rgba(255, 182, 193, 0.8);
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="fill:pink"><circle cx="10" cy="10" r="10"/></svg>'), pointer;
 }
-
-
 
 .preview-text {
     position: absolute;
-    bottom: -90px; 
+    bottom: -110px; 
     top: auto;
     
     background: #fff;
@@ -157,13 +206,12 @@ body::before {
     width: 180px;
     border-radius: 10px;
     
-   
     border: 4px solid var(--pastel-blue);
     box-shadow: 6px 6px 0 rgba(0,0,0,0.1);
     
     font-family: var(--pixel-font);
-    font-size: 0.65rem;
-    line-height: 1.6;
+    font-size: 1.2rem; 
+    line-height: 1.2;
     text-align: center;
     
     opacity: 0;
@@ -173,7 +221,6 @@ body::before {
     pointer-events: none;
     z-index: 20;
 }
-
 
 .preview-text::before {
     content: '';
@@ -188,7 +235,7 @@ body::before {
 .pixel-label {
     display: block;
     color: var(--pastel-purple);
-    font-size: 0.5rem;
+    font-size: 1rem; 
     margin-bottom: 4px;
     border-bottom: 2px dashed #eee;
 }
@@ -200,6 +247,7 @@ body::before {
     color: #e5a3ad;
     padding: 2px 4px;
     border-radius: 4px;
+    font-size: 0.9rem;
 }
 
 .machine:hover .preview-text {
@@ -207,7 +255,6 @@ body::before {
     visibility: visible;
     transform: translateY(0);
 }
-
 
 .plastic-shine {
     position: absolute;
@@ -278,7 +325,6 @@ body::before {
     border-radius: 5px;
 }
 
-
 .claw { background: #ffe4e1; }
 .pacman { background: var(--pastel-yellow); }
 .snake { background: var(--pastel-green); }
@@ -326,7 +372,7 @@ body::before {
     display: flex; justify-content: space-evenly; align-items: center;
     background: #fff; width: 90%; height: 80%; border-radius: 12px;
 }
-.reel { font-size: 1.2rem; color: #ffb6c1; font-weight: 700; }
+.reel { font-size: 1.5rem; color: #ffb6c1; font-weight: 700; font-family: 'Kinkee', cursive; }
 
 .lever-handle {
     position: absolute; bottom: 5px; left: 0;
@@ -347,16 +393,15 @@ body::before {
     width: 25px; height: 25px; border: 4px solid #fff; border-radius: 50%;
 }
 
-
-
 @keyframes floatTitle { 
     0%, 100% { transform: translateY(0); } 
     50% { transform: translateY(-10px); } 
 }
 
-@keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-    20%, 24%, 55% { opacity: 0.8; text-shadow: none; }
+
+@keyframes shineMove {
+    0% { background-position: -200%; }
+    100% { background-position: 200%; }
 }
 
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -368,7 +413,6 @@ body::before {
     100% { background-position: 60px 60px, 90px 90px; }
 }
 
-
 @media (max-width: 800px) {
     .machine-shelf { 
         flex-wrap: wrap; 
@@ -377,7 +421,7 @@ body::before {
         padding: 40px 20px; 
         border-radius: 30px; 
     }
-    .header-title { font-size: 1.5rem; text-align: center; }
+    .header-title { font-size: 2.5rem; text-align: center; }
     .machine { width: 130px; height: 230px; margin: 0 !important;  }
     .preview-text { display: none;  }
 }
