@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pa-Chii-nko!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="pachinko.css">
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<div class="game-console">
+    
+    <div class="side-panel left-panel">
+        <h1 class="game-title">Pa-Chii<br>nko!</h1>
+        
+        <div class="stats-card">
+            <span class="stat-label">SCORE</span>
+            <span class="stat-value" id="score-display">0</span>
+        </div>
+
+        <div class="stats-card ball-card">
+            <span class="stat-label">BALLS</span>
+            <span class="stat-value" id="ball-count">15</span>
+        </div>
+
+        <button class="reset-btn" id="reset-btn">RESTART ↺</button>
+    </div>
+
+    <div class="board-container">
+        <div class="pachinko-board" id="board">
+            
+            <div class="dropper-rail">
+                <div class="dropper-claw" id="dropper">
+                    <div class="claw-arrow">⬇</div>
+                </div>
+            </div>
+
+            <div id="pins-container"></div>
+            <div id="balls-container"></div>
+            <div id="particles-container"></div>
+
+            <div class="pockets-row">
+                <div class="pocket side-pocket" data-score="100">
+                    <div class="pocket-shine"></div>
+                    <span class="pocket-val">100</span>
+                </div>
+                <div class="pocket main-pocket" data-score="500">
+                    <div class="pocket-ring"></div>
+                    <div class="pocket-star">⭐</div>
+                    <span class="pocket-val">500</span>
+                </div>
+                <div class="pocket side-pocket" data-score="100">
+                    <div class="pocket-shine"></div>
+                    <span class="pocket-val">100</span>
+                </div>
+            </div>
+
+            <div class="cheer-layer">
+                <img src="../assets/hachiCheer.png" class="mascot hachi" id="hachiCheer" alt="Hachi">
+                <img src="../assets/usaCheer.png" class="mascot usa" id="usaCheer" alt="Usagi">
+                <div class="combo-text" id="comboText">NICE!</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="side-panel right-panel">
+        <div class="info-bubble">
+            <p><strong>HOW TO PLAY</strong></p>
+            <p>🐭 Move mouse</p>
+            <p>✨ Click to drop</p>
+            <p>⭐ Hit stars!</p>
+        </div>
+        <div class="deco-stickers">
+            <div class="sticker s1"></div> 
+            <div class="sticker s2"></div>
+            <div class="sticker s3"></div>
+        </div>
+    </div>
+
+    <!-- fix the stickers, idk wat to make them LOL -->
+
+</div>
+
+<div id="game-over-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <h2>GAME FINISHED!</h2>
+        <p>Final Score:</p>
+        <div class="final-score" id="final-score-display">0</div>
+        <button class="reset-btn modal-btn" id="modal-restart">PLAY AGAIN ✨</button>
+    </div>
+</div>
+
+<script src="pachinko.js"></script>
+</body>
+</html>
