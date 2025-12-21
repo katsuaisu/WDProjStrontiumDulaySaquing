@@ -453,20 +453,15 @@ footer {
     pointer-events: none;
 }
 
-/* cursor */
 
 html, body {
-   
-    cursor: url('assets/cursorMomonga.png'), auto;
+    cursor: url('../assets/cursorMomonga.png'), auto;
 }
+
 
 a, 
 button, 
-.clickHere, 
-.magic-name, 
-.close-btn, 
-.menu-buttons a,
-.char-card, 
-.currency-container {
-    cursor: url('assets/cursorMomonga2.png'), pointer;
+.machine, 
+.star-decor {
+    cursor: url('../assets/cursorMomonga2.png'), pointer;
 }

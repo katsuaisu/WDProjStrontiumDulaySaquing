@@ -70,3 +70,23 @@ bonusLetter.addEventListener("click", function(event)
 });
 
 // event listener is fun, its way easier to do event listener to change elements on the webpage
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    document.querySelectorAll('button, a').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            el.style.cursor = "url('../assets/cursorMomonga2.png'), pointer";
+        });
+        el.addEventListener('mouseleave', () => {
+            el.style.cursor = "url('../assets/cursorMomonga.png'), auto";
+        });
+    });
+    
+  
+    document.body.addEventListener('error', (e) => {
+        if (e.target.tagName === 'IMG') {
+            document.body.style.cursor = 'auto';
+        }
+    }, true);
+});
