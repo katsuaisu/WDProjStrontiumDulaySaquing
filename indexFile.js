@@ -73,10 +73,12 @@ bonusLetter.addEventListener("click", function(event)
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('button, a').forEach(el => {
         el.addEventListener('mouseenter', () => {
-            el.style.cursor = "url('../assets/cursorMomonga2.png'), pointer";
+            
+            el.style.cursor = "url('assets/cursorMomonga2.png'), pointer";
         });
         el.addEventListener('mouseleave', () => {
-            el.style.cursor = "url('../assets/cursorMomonga.png'), auto";
+          
+            el.style.cursor = "url('assets/cursorMomonga.png'), auto";
         });
     });
     

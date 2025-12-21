@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Kinkee';
-    src: url('../assets/fonts/KINKEE__.TTF') format('truetype');
+    src: url('KINKEE__.TTF') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -21,7 +21,7 @@ html, body {
     background: var(--bg);
     font-family: 'Kinkee', Arial, sans-serif;
     overflow: hidden;
-    cursor: url('../assets/cursorMomonga.png'), auto;
+    cursor: url('assets/cursorMomonga.png'), auto;
 }
 
 
@@ -244,5 +244,5 @@ footer {
 }
 
 a, button, .machine, .star-decor {
-    cursor: url('../assets/cursorMomonga2.png'), pointer;
+    cursor: url('assets/cursorMomonga2.png'), pointer;
 }
