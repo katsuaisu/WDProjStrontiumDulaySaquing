@@ -49,7 +49,7 @@ body::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url('assets/iloveyouchiikabu.gif');
+    background-image: url('../assets/iloveyouchiikabu.gif');
     background-size: cover;
     background-position: center;
     filter: blur(5px);
@@ -424,4 +424,8 @@ body::before {
     .header-title { font-size: 2.5rem; text-align: center; }
     .machine { width: 130px; height: 230px; margin: 0 !important;  }
     .preview-text { display: none;  }
+}
+
+a, button, .machine, .star-decor {
+    cursor: url('assets/cursorMomonga2.png'), pointer;
 }

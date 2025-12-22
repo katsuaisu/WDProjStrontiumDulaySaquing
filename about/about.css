@@ -222,7 +222,7 @@ h2 {
 .star-2 { bottom: -30px; right: 40px; color: var(--accent-blue); text-shadow: 0 0 10px #fff; animation: starTwinkle 4s infinite 1s; }
 .star-3 { top: 50%; left: -50px; color: var(--accent-pink); font-size: 5rem; animation: rotateStar 10s linear infinite; }
 
-/* Animations */
+
 @keyframes idleBob {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-15px) rotate(1deg); }
@@ -261,7 +261,7 @@ h2 {
     to { transform: rotate(360deg); }
 }
 
-/* Rain Logic Styling */
+
 .falling-item {
     position: fixed;
     top: -150px;
@@ -277,7 +277,7 @@ h2 {
     100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
 }
 
-/* Responsive */
+
 @media (max-width: 900px) {
     .about-inner {
         flex-direction: column;
@@ -295,3 +295,4 @@ h2 {
     .friends-img { max-width: 250px; }
     .close-btn { width: 60px; height: 60px; font-size: 1.8rem; top: -20px; right: -20px; }
 }
+
