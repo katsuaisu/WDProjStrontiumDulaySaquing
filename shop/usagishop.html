@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usagi</title>
+    <link rel="stylesheet" href="usagishop.css">
+</head>
+<body>
+    <div class="pixel-bg"></div>
+    <div class="candy-frosting"></div>
+    
+    <div class="custom-cursor" id="cursor"></div>
+    
+    <main class="main-canvas">
+        <div class="glass-sheen"></div>
+        <div class="shop-grid">
+            <section class="left-wing">
+                <h1 class="title">Character</h1>
+                <div class="character-container">
+                    <img src="../assets\eviUsa.png" alt="Evil Usagi" class="floating-chik">
+                    <div class="sparkle-container"></div>
+                </div>
+                <button class="mega-bouncy-btn" id="buyBtn">Purchase?</button>
+            </section>
+
+            <section class="right-wing">
+                <div class="toy-card bg-card">
+                    <h2 class="title">Background</h2>
+                    <div class="bg-preview-box">
+                        <img src="../assets/usagiBack.jpg" alt="Usagi BG">
+                        <div class="glossy-finish"></div>
+                    </div>
+                </div>
+
+                <div class="toy-card cursor-card">
+                    <h2 class="title">Cursors</h2>
+                    <div class="cursor-previews">
+                        <div class="cursor-item"><img src="../assets/cursorUsagi.png" alt="Cursor 1"></div>
+                        <div class="cursor-item"><img src="../assets/cursorUsagi2.png" alt="Cursor 2"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+        <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="toy-star"></div>
+                <h2 class="title">Shopping Cart</h2>
+                <div class="toy-star"></div>
+            </div>
+            <p class="modal-text">Would you like to buy the Usagi theme for 300,000 Pochettes?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn yes">Yes, please! </button>
+                <button class="modal-btn no" id="closeModal">Maybe later...</button>
+            </div>
+            <div class="glossy-finish"></div>
+        </div>
+    </div>
+
+    <script src="usagishop.js"></script>
+</body>
+</html>
