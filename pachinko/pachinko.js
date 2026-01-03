@@ -40,7 +40,7 @@ const els = {
 function init() {
     setupPins();
     setupPockets();
-    
+
     els.board.addEventListener('mousemove', (e) => {
         if (!state.gameActive) return;
         const rect = els.board.getBoundingClientRect();
@@ -82,11 +82,11 @@ function setupPins() {
     const cols = 8;
     const spacingX = 480 / cols;
     const spacingY = 55;
-    
+
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
             if (r % 2 === 0 && c === cols - 1) continue;
-            
+
             let x = (c * spacingX) + (spacingX / 2) + (r % 2 === 0 ? 0 : spacingX / 2);
             let y = 120 + (r * spacingY);
 
@@ -111,10 +111,10 @@ function setupPockets() {
     state.pockets = Array.from(domPockets).map(el => {
         const rect = el.getBoundingClientRect();
         const boardRect = els.board.getBoundingClientRect();
-        
+
         const x = (rect.left - boardRect.left) + (rect.width / 2);
         const y = (rect.top - boardRect.top) + (rect.height / 2);
-        
+
         return {
             x, y,
             radius: rect.width / 2.5,
@@ -127,7 +127,7 @@ function setupPockets() {
 
 function spawnBall(x) {
     if (state.ballsLeft <= 0) return;
-    
+
     const boardWidth = els.board.offsetWidth;
     x = Math.max(20, Math.min(boardWidth - 20, x));
 
@@ -137,7 +137,7 @@ function spawnBall(x) {
     const el = document.createElement('div');
     el.className = 'chiika-ball';
     els.ballsContainer.appendChild(el);
-    
+
     els.dropper.classList.add('shoot');
     setTimeout(() => els.dropper.classList.remove('shoot'), 150);
 
@@ -161,10 +161,10 @@ function gameLoop() {
         if (!ball.active) return;
 
         const dt = 1 / CONFIG.subSteps;
-        
+
         for (let step = 0; step < CONFIG.subSteps; step++) {
             ball.vy += CONFIG.gravity * dt;
-            
+
             ball.x += ball.vx;
             ball.y += ball.vy;
 
@@ -181,24 +181,24 @@ function gameLoop() {
 
                 const dx = ball.x - pin.x;
                 const dy = ball.y - pin.y;
-                const distSq = dx*dx + dy*dy;
+                const distSq = dx * dx + dy * dy;
                 const minDist = CONFIG.ballRadius + CONFIG.pinRadius;
 
                 if (distSq < minDist * minDist) {
                     const angle = Math.atan2(dy, dx);
-                    
+
                     const dist = Math.sqrt(distSq);
                     const overlap = minDist - dist;
                     ball.x += Math.cos(angle) * overlap;
                     ball.y += Math.sin(angle) * overlap;
 
-                    const speed = Math.sqrt(ball.vx*ball.vx + ball.vy*ball.vy);
-                    
-                    const chaosAngle = angle + (Math.random() - 0.5) * 0.5; 
-                    
+                    const speed = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy);
+
+                    const chaosAngle = angle + (Math.random() - 0.5) * 0.5;
+
                     ball.vx = Math.cos(chaosAngle) * speed * 0.8;
                     ball.vy = Math.sin(chaosAngle) * speed * 0.8;
-                    
+
                     ball.vRot = (Math.random() - 0.5) * 20;
 
                     triggerPinHit(pin);
@@ -228,7 +228,7 @@ function checkPockets(ball) {
     for (let pocket of state.pockets) {
         const dx = ball.x - pocket.x;
         const dy = ball.y - pocket.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
+        const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < pocket.radius + 10) {
             scorePoints(pocket.score, pocket.type);
@@ -247,7 +247,7 @@ function scorePoints(amount, type) {
     const comboBonus = (state.combo - 1) * 10;
     const total = amount + comboBonus;
     state.score += total;
-    
+
     updateUI();
 
     if (type === 'main' || state.combo > 3) {
@@ -280,7 +280,7 @@ function triggerPinHit(pin) {
     pin.el.classList.remove('hit');
     void pin.el.offsetWidth;
     pin.el.classList.add('hit');
-    
+
     if (Math.random() > 0.5) createSparkles(pin.x, pin.y, '#fff3b0', 2);
 }
 
@@ -300,20 +300,20 @@ function triggerMascot(name) {
     el.classList.add('pop-in');
 }
 
-function createSparkles(x, y, color, count=5) {
-    for(let i=0; i<count; i++) {
+function createSparkles(x, y, color, count = 5) {
+    for (let i = 0; i < count; i++) {
         const p = document.createElement('div');
         p.className = 'particle';
         p.style.left = `${x}px`;
         p.style.top = `${y}px`;
         p.style.background = color;
-        
+
         const tx = (Math.random() - 0.5) * 100;
         const ty = (Math.random() - 0.5) * 100;
-        
+
         p.style.setProperty('--tx', `${tx}px`);
         p.style.setProperty('--ty', `${ty}px`);
-        
+
         els.particlesContainer.appendChild(p);
         setTimeout(() => p.remove(), 800);
     }

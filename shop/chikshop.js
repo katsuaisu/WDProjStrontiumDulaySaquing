@@ -7,7 +7,7 @@ const closeBtn = document.getElementById('closeModal');
 document.addEventListener('mousemove', (e) => {
     cursor.style.left = `${e.clientX}px`;
     cursor.style.top = `${e.clientY}px`;
-    
+
     const x = (window.innerWidth / 2 - e.clientX) / 95;
     const y = (window.innerHeight / 2 - e.clientY) / 95;
     if (bg) bg.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
@@ -28,15 +28,15 @@ closeBtn.addEventListener('click', () => {
 });
 
 window.addEventListener('click', (e) => {
-    if(e.target === modal) modal.style.display = 'none';
+    if (e.target === modal) modal.style.display = 'none';
 });
 
 function spawnSparkle() {
     const s = document.createElement('div');
     s.className = 'sparkle';
     const container = document.querySelector('.character-container');
-    
-    if(container) {
+
+    if (container) {
         const rect = container.getBoundingClientRect();
         s.style.left = Math.random() * rect.width + 'px';
         s.style.top = Math.random() * rect.height + 'px';

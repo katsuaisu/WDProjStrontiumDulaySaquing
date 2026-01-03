@@ -15,7 +15,7 @@ body {
     padding: 0;
     height: 100vh;
     width: 100vw;
-    background: #d6eaff; 
+    background: #d6eaff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,10 +83,12 @@ body {
 .main-canvas::-webkit-scrollbar {
     width: 15px;
 }
+
 .main-canvas::-webkit-scrollbar-track {
     background: #f0f7ff;
     border-radius: 10px;
 }
+
 .main-canvas::-webkit-scrollbar-thumb {
     background: #85c1ff;
     border-radius: 10px;
@@ -99,7 +101,7 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.7) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.7) 100%);
     transform: rotate(30deg);
     pointer-events: none;
     z-index: 10;
@@ -120,7 +122,7 @@ body {
 }
 
 .title {
-    color: #3a86ff; 
+    color: #3a86ff;
     font-size: 3.5rem;
     margin: 0 0 20px 0;
     text-align: center;
@@ -143,7 +145,7 @@ body {
     margin-top: 30px;
     box-shadow: 0 12px 0px #1a75ff, 0 25px 45px rgba(58, 134, 255, 0.5);
     animation: btnHeartbeat 1.2s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .mega-bouncy-btn:hover {
@@ -215,7 +217,10 @@ body {
 
 .modal-overlay {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(179, 217, 255, 0.6);
     backdrop-filter: blur(15px);
     display: none;
@@ -234,12 +239,17 @@ body {
     width: 750px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 35px 0px #b3d9ff, 0 60px 120px rgba(0,0,0,0.15);
+    box-shadow: 0 35px 0px #b3d9ff, 0 60px 120px rgba(0, 0, 0, 0.15);
     animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform: scale(0.75);
 }
 
-.modal-text { color: #3a86ff; font-size: 2.2rem; margin: 30px 0; font-weight: bold; }
+.modal-text {
+    color: #3a86ff;
+    font-size: 2.2rem;
+    margin: 30px 0;
+    font-weight: bold;
+}
 
 .modal-buttons {
     display: flex;
@@ -259,46 +269,104 @@ body {
     transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.modal-btn.yes { background: #3a86ff; box-shadow: 0 10px 0px #1a75ff; }
-.modal-btn.no { background: #b3d9ff; box-shadow: 0 10px 0px #85c1ff; }
+.modal-btn.yes {
+    background: #3a86ff;
+    box-shadow: 0 10px 0px #1a75ff;
+}
 
-.modal-btn:hover { transform: scale(1.1); filter: brightness(1.1); }
-.modal-btn:active { transform: translateY(5px); box-shadow: 0 5px 0px #1a75ff; }
+.modal-btn.no {
+    background: #b3d9ff;
+    box-shadow: 0 10px 0px #85c1ff;
+}
+
+.modal-btn:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+.modal-btn:active {
+    transform: translateY(5px);
+    box-shadow: 0 5px 0px #1a75ff;
+}
 
 .toy-star {
-    width: 40px; height: 40px;
+    width: 40px;
+    height: 40px;
     background: #8ec5fc;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     animation: starSpin 4s linear infinite;
 }
 
 @keyframes toyFloat {
-    0%, 100% { transform: translateY(0) scale(0.75); }
-    50% { transform: translateY(-20px) scale(0.75); }
+
+    0%,
+    100% {
+        transform: translateY(0) scale(0.75);
+    }
+
+    50% {
+        transform: translateY(-20px) scale(0.75);
+    }
 }
 
-@keyframes starSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes starSpin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
 
 @keyframes superBounce {
-    0%, 100% { transform: translateY(0) scale(1, 1); }
-    50% { transform: translateY(-50px) scale(1.08, 0.92); }
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1, 1);
+    }
+
+    50% {
+        transform: translateY(-50px) scale(1.08, 0.92);
+    }
 }
 
 @keyframes btnHeartbeat {
-    0%, 100% { transform: scale(1); }
-    25% { transform: scale(1.2, 0.8); }
-    50% { transform: scale(0.9, 1.1); }
-    75% { transform: scale(1.1, 0.9); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.2, 0.8);
+    }
+
+    50% {
+        transform: scale(0.9, 1.1);
+    }
+
+    75% {
+        transform: scale(1.1, 0.9);
+    }
 }
 
-@keyframes popIn { 
-    from { transform: scale(0) rotate(-20deg); opacity: 0; } 
-    to { transform: scale(0.75) rotate(0); opacity: 1; } 
+@keyframes popIn {
+    from {
+        transform: scale(0) rotate(-20deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(0.75) rotate(0);
+        opacity: 1;
+    }
 }
 
 .sparkle {
     position: absolute;
-    width: 15px; height: 15px;
+    width: 15px;
+    height: 15px;
     background: #fff;
     border-radius: 50%;
     pointer-events: none;
@@ -306,20 +374,34 @@ body {
 }
 
 @keyframes sparkleExit {
-    0% { transform: scale(0); opacity: 1; }
-    100% { transform: scale(2) translate(var(--tx), var(--ty)); opacity: 0; }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2) translate(var(--tx), var(--ty));
+        opacity: 0;
+    }
 }
 
 .click-heart {
     position: fixed;
-    font-size: 60px; 
-    color: #4d94ff; 
+    font-size: 60px;
+    color: #4d94ff;
     pointer-events: none;
     animation: heartFly 1s forwards;
     z-index: 999999;
 }
 
 @keyframes heartFly {
-    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-    100% { transform: translate(-50%, -200%) scale(3) rotate(30deg); opacity: 0; }
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -200%) scale(3) rotate(30deg);
+        opacity: 0;
+    }
 }

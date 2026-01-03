@@ -13,7 +13,7 @@ const triviaData = {
     "Chiikawa": "Chiikawa (ちいかわ) is the titular character and protagonist of the manga and anime series. They are best friends with Hachiware and Usagi, and spends much of their time hanging out together.",
     "Hachiware": "Hachiware (ハチワレ) is one of the main characters in the Chiikawa manga and anime series. In the series, they are best friends with Chiikawa and Usagi, and are often seen spending time with them on their daily adventures.",
     "Usagi": "Usagi (うさぎ) is one of the main characters in the Chiikawa manga and anime series. In the Chiikawa-verse, they are best friends with Chiikawa and Hachiware, known for their energetic personality and playful antics during their time together.",
-    "Momonga": "Momonga (モモンガ) is a secondary character of the Chiikawa manga and anime series. They are a flying squirrel who is often seen begging for attention and praise, stealing food, and causing trouble for other characters. Their name comes from the Japanese word momonga, which means flying squirrel.", 
+    "Momonga": "Momonga (モモンガ) is a secondary character of the Chiikawa manga and anime series. They are a flying squirrel who is often seen begging for attention and praise, stealing food, and causing trouble for other characters. Their name comes from the Japanese word momonga, which means flying squirrel.",
     "Kurimanju": "Kuri-Manjū (くりまんじゅう), or Kurimanju/Kuri-Manju, is a character in the Chiikawa series, inspired by the Japanese chestnut bun and a honey badger. He often acts like a middle-age Japanese man, typically seen eating snacks or drinking alcohol, after which he always makes a very loud sigh.",
     "Shisa": "Shisa (シーサー) is a character in the Chiikawa series. They're a hardworking Lion-Dog, named after the traditional guardian figure from Okinawan mythology. They currently work at Rou Ramen Shop. They are also studying to get their alcohol license. Their dream is to drink with their ramen master, Ramen Yoroi-san, one day.",
     "Chiikabu": "Chiikabu (ちいかぶ), also known as Kabutomushi, is a deuteragonist and an antagonist in the Chiikawa manga and anime series, specifically during the Chiikabu arc. It made its debut when it jumped on Chiikawa's face while the main trio were exploring a cave.",
@@ -21,7 +21,7 @@ const triviaData = {
     "Kani": "Furuhonya (古本屋) or Kani (かに lit. Crab) is a secondary character in the Chiikawa manga series. They are a street vendor who runs a used bookstore. Originally appeared as a Mob character, Furuhonya revealed their appearance when they befriended Momonga."
 };
 
-let state = 'idle'; 
+let state = 'idle';
 let posX = 50;
 let timeLeft = 10;
 let timerId = null;
@@ -90,7 +90,7 @@ function dropClaw() {
     clearInterval(timerId);
     assembly.style.transition = 'top 1.5s cubic-bezier(0.45, 0.05, 0.55, 0.95)';
     cable.style.transition = 'top 1.5s cubic-bezier(0.45, 0.05, 0.55, 0.95)';
-    assembly.style.top = '240px'; 
+    assembly.style.top = '240px';
     cable.style.top = '-760px';
     setTimeout(() => {
         clawBody.classList.add('grabbing');
@@ -101,7 +101,7 @@ function dropClaw() {
             state = 'returning';
             setTimeout(() => {
                 carriage.style.transition = 'left 2s ease-in-out';
-                posX = 5; 
+                posX = 5;
                 carriage.style.left = posX + '%';
                 let slipCheck = setInterval(() => {
                     if (isHolding && Math.random() < 0.06) {
@@ -117,7 +117,7 @@ function dropClaw() {
                         isHolding = false;
                         const p = caughtPlushie;
                         p.style.transition = 'top 0.8s ease-in, transform 0.8s';
-                        p.style.top = '120%'; 
+                        p.style.top = '120%';
                         p.style.transform = 'rotate(360deg) scale(0.5)';
                         setTimeout(() => showWin(p), 800);
                     } else {
@@ -135,9 +135,9 @@ function checkCollision() {
     document.querySelectorAll('.plush').forEach(p => {
         if (p.style.opacity === '0') return;
         const pRect = p.getBoundingClientRect();
-        const dx = (clawRect.left + clawRect.width/2) - (pRect.left + pRect.width/2);
-        const dy = (clawRect.bottom - 10) - (pRect.top + pRect.height/2);
-        const dist = Math.sqrt(dx*dx + dy*dy);
+        const dx = (clawRect.left + clawRect.width / 2) - (pRect.left + pRect.width / 2);
+        const dy = (clawRect.bottom - 10) - (pRect.top + pRect.height / 2);
+        const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 110) target = p;
     });
     if (target) {
@@ -190,17 +190,17 @@ function resetGame() {
 }
 
 playBtn.onclick = () => {
-    if (state === 'idle') { 
-        state = 'playing'; 
-        playBtn.innerText = 'DROP!'; 
-        startTimer(); 
+    if (state === 'idle') {
+        state = 'playing';
+        playBtn.innerText = 'DROP!';
+        startTimer();
     }
     else if (state === 'playing') {
         dropClaw();
     }
 };
 
-function closePopup() { 
-    winPopup.style.display = 'none'; 
-    resetGame(); 
+function closePopup() {
+    winPopup.style.display = 'none';
+    resetGame();
 }

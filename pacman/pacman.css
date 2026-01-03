@@ -1,6 +1,6 @@
 :root {
-    --bg-overlay: rgba(255, 252, 249, 0.4); 
-    --card-bg: rgba(255, 255, 255, 0.85);  
+    --bg-overlay: rgba(255, 252, 249, 0.4);
+    --card-bg: rgba(255, 255, 255, 0.85);
     --accent-pink: #FF9AA2;
     --accent-mint: #B5EAD7;
     --accent-yellow: #FFF5BA;
@@ -31,7 +31,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(12px); 
+    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     background-color: var(--bg-overlay);
     z-index: 0;
@@ -42,13 +42,13 @@ body {
     position: relative;
     z-index: 1;
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     background: var(--card-bg);
     padding: 25px;
     border-radius: 40px;
-    box-shadow: 
-        0 20px 40px rgba(0,0,0,0.1), 
-        inset 0 0 0 2px rgba(255,255,255,0.6);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.6);
     gap: 30px;
     max-width: 900px;
     align-items: center;
@@ -70,7 +70,7 @@ body {
     line-height: 1;
     margin: 0;
     color: var(--accent-pink);
-    text-shadow: 2px 2px 0px #FFF, 4px 4px 0px rgba(0,0,0,0.05);
+    text-shadow: 2px 2px 0px #FFF, 4px 4px 0px rgba(0, 0, 0, 0.05);
     transform: rotate(-5deg);
 }
 
@@ -79,7 +79,7 @@ body {
     padding: 15px;
     border-radius: 20px;
     width: 100%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -104,10 +104,11 @@ body {
     justify-content: center;
     gap: 5px;
 }
+
 .lives-container img {
     width: 24px;
     height: 24px;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
 }
 
 .instructions {
@@ -115,6 +116,7 @@ body {
     font-size: 0.85rem;
     opacity: 0.8;
 }
+
 .keys span {
     display: inline-block;
     background: #FFF;
@@ -125,6 +127,7 @@ body {
     font-size: 0.8rem;
     color: var(--accent-pink);
 }
+
 .hint {
     margin-top: 10px;
     font-size: 0.75rem;
@@ -143,8 +146,8 @@ body {
 canvas {
     display: block;
     border-radius: 16px;
-   
-    background-color: #FFFCF9; 
+
+    background-color: #FFFCF9;
 }
 
 
@@ -216,11 +219,18 @@ button:active {
         padding: 15px;
         gap: 15px;
     }
+
     .sidebar {
         flex-direction: row;
         width: 100%;
         justify-content: space-between;
     }
-    .instructions { display: none; }
-    .logo-area h1 { font-size: 1.5rem; }
+
+    .instructions {
+        display: none;
+    }
+
+    .logo-area h1 {
+        font-size: 1.5rem;
+    }
 }
