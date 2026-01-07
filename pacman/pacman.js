@@ -5,6 +5,9 @@ const CANVAS_HEIGHT = 496;
 const TILE_SIZE = 24;
 const FPS = 60;
 
+let xSwipe = 0;
+let ySwipe = 0;
+const swipe_Threshold = 30;
 
 const COLOR_WALL = "#B5EAD7";
 const COLOR_WALL_BORDER = "#88D8B0";
@@ -295,9 +298,57 @@ function initGame() {
         if (['ArrowRight', 'd', 'D'].includes(e.key)) player.nextDir = DIR.RIGHT;
         if (e.key.startsWith('Arrow')) e.preventDefault();
     });
-
-    draw();
 }
+    canvas.addEventListener('touchstart', (e) => {
+        if(gameState !== 'PLAYING') return;
+
+        const touch = e.touches[0];
+        xSwipe = touch.clientX;
+        ySwipe = touch.clientY;
+    });
+
+    canvas.addEventListener('touchend', (e) => {
+
+        if(gameState !== 'PLAYING') 
+            {
+                return;
+            }
+
+        const touch = e.changedTouches[0];
+        const changeInX = touch.clientX - xSwipe;
+        const changeInY = touch.clientY - ySwipe;
+        
+        if((Math.abs(changeInX) < swipe_Threshold) && (Math.abs(changeInY) < swipe_Threshold)) 
+            {
+                return; //this ignores small movements >:3
+            }
+
+        if(Math.abs(changeInX) > Math.abs(changeInY)) //for horizontal movement
+            {
+                if(changeInX > 0) 
+                {
+                    player.nextDir = DIR.RIGHT;
+                }
+
+                else
+                {
+                    player.nextDir = DIR.LEFT;
+                }
+            }
+
+        else //for vertical movement
+            {
+                if(changeInY > 0)
+                {
+                    player.nextDir = DIR.DOWN;
+                }
+
+                else
+                {
+                    player.nextDir = DIR.UP;
+                }
+            } 
+});
 
 function startGame() {
     document.getElementById('startScreen').classList.add('hidden');
