@@ -1,9 +1,9 @@
 # Project Proposal
 ## WDProjStrontiumDulaySaquing
 
-1. Title: Chiikawa & Woopie's Arcade!
+1. Final Title: ChiikArcade
 
-2. Second Sub-Title: Welcome to Woopie and Chiikawa's Arcade!
+2. Second Sub-Title: Welcome to the ChiikArcade!
 
 3. Canva Link for our Logo: ![Logo For Website](assests/Webpage_Logo.png)
 
@@ -20,7 +20,7 @@
 
     - Contacts and Information (Page 5): This is the webpage that showcases the contact info and institution the developers made this webpage under. 
 
-    - Bonus page: If the main title in the homepage is clicked a certain amount of times, a meme photo of the developers will show.
+    - Bonus page: If a letter on the main title of the homepage is clicked, a meme photo of one of the developers will show.
 
 6. JavaScript will be used in our webpage as a tool for analytical and conditional statements such as the mechanics of the games, a webpage counter, and more.
 
@@ -29,3 +29,21 @@
 8. The navigation design is based solely on large png of buttons, used as a navigation tool such as turning to the next page, going to the game webpage, etc.
 
 
+Features (So far):
+- Three games out of five is done and working for laptop players.
+- These three games are fully furnished with animations as well.
+- Excluding the games, the fully furnished webpages are the:
+    - Homepage
+    - Shop webpage (including the preview of new purchasable themes)
+    - About webpage
+
+Definition of Done:
+- The remaining two games are finished and fully working.
+- All controls are fully working on both laptop and mobile.
+- Coin system is now working.
+- Purchased themes now apply to webpages.
+
+Details for the Form:
+- The form will appear on the screen before users can go to the Homepage.
+- The use of this form is to collect the user data (username and password) for leaderboards, coin progress, etc.
+- The data will be stored in local storage
