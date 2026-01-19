@@ -597,4 +597,28 @@ that fits on the different types of screens like percentages or vw*/
                 .menu-buttons a {
                     font-size: 2.2rem;
                 }
+
+                .music-toggle {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    z-index: 10000;
+                    padding: 8px 18px;
+                    background: rgba(255, 255, 255, 0.2);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    border: 2px solid rgba(255, 255, 255, 0.5);
+                    border-radius: 50px;
+                    color: white;
+                    font-family: 'SweetyRasty', sans-serif;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+                    transition: all 0.3s ease;
+                }
+
+                .music-toggle:hover {
+                    background: rgba(255, 255, 255, 0.4);
+                    transform: scale(1.05);
+                }
             }

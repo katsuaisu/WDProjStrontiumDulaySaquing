@@ -1,21 +1,21 @@
 // 1. Import from the Google CDN URLs instead of just names
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { 
-    getAuth, 
-    signInWithEmailAndPassword, 
-    createUserWithEmailAndPassword, 
-    signOut, 
-    onAuthStateChanged 
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCswu6YR_Zcd4htvNaeuVEKqczw9GlrHSI",
-  authDomain: "chiikarcade.firebaseapp.com",
-  projectId: "chiikarcade",
-  storageBucket: "chiikarcade.firebasestorage.app",
-  messagingSenderId: "692701231363",
-  appId: "1:692701231363:web:aba787e6712a167cd99136"
+    apiKey: "AIzaSyCswu6YR_Zcd4htvNaeuVEKqczw9GlrHSI",
+    authDomain: "chiikarcade.firebaseapp.com",
+    projectId: "chiikarcade",
+    storageBucket: "chiikarcade.firebasestorage.app",
+    messagingSenderId: "692701231363",
+    appId: "1:692701231363:web:aba787e6712a167cd99136"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -25,7 +25,7 @@ const auth = getAuth(app);
 
 (function createParticles() {
     const particleLayer = document.getElementById('particles');
-    if (!particleLayer) return; 
+    if (!particleLayer) return;
 
     const pastelColors = ['#fff7ff', '#dff8ff', '#fbe7f2', '#fef0c7', '#e9dcff'];
     const pixelColors = ['#fff', '#ffd6f0', '#e7f4ff', '#ffd9b6'];
@@ -180,4 +180,31 @@ document.addEventListener('DOMContentLoaded', () => {
         el.addEventListener('mouseenter', () => el.style.cursor = "url('assets/cursorMomonga2.png'), pointer");
         el.addEventListener('mouseleave', () => el.style.cursor = "url('assets/cursorMomonga.png'), auto");
     });
+
+    const music = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+
+    musicToggle.addEventListener('click', () => {
+        if (music.paused) {
+            music.play();
+            musicToggle.innerText = "MUTE";
+        } else {
+            if (music.muted) {
+                music.muted = false;
+                musicToggle.innerText = "MUTE";
+            } else {
+                music.muted = true;
+                musicToggle.innerText = "UNMUTE";
+            }
+        }
+    });
+
+
+    document.addEventListener('click', () => {
+        if (music.paused && musicToggle.innerText === "PLAY MUSIC") {
+            music.play().then(() => {
+                musicToggle.innerText = "MUTE";
+            }).catch(err => console.log("Autoplay blocked until user interaction."));
+        }
+    }, { once: true });
 });

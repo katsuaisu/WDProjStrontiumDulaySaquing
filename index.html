@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ChiikArcade</title>
+    <link rel="icon" type="image/favicon" href="../assets/favicon.png">
     <link rel="stylesheet" href="index.css">
 </head>
 
@@ -52,7 +53,7 @@
         </div>
     </div>
 
-    <img src="assets/Webpage_Logo.png" id="logo" alt="Website Logo">
+
 
     <div class="game-container" id="gameContainer">
         <img src="assets/chiksomething.png" alt="Pixel art character" class="character-sprite" id="characterSprite">
@@ -79,7 +80,11 @@
         <p>All images used are not related to the official Chiikawa and Nintendo company.</p>
         <p>Psst...Want a new character? Click a letter from the title for a surprise ;3</p>
     </footer>
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
+    <button id="musicToggle" class="music-toggle">PLAY MUSIC</button>
     <script type="module" src="indexFile.js"></script>
 </body>
 
