@@ -1,5 +1,32 @@
+// 1. Import from the Google CDN URLs instead of just names
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
+    signOut, 
+    onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCswu6YR_Zcd4htvNaeuVEKqczw9GlrHSI",
+  authDomain: "chiikarcade.firebaseapp.com",
+  projectId: "chiikarcade",
+  storageBucket: "chiikarcade.firebasestorage.app",
+  messagingSenderId: "692701231363",
+  appId: "1:692701231363:web:aba787e6712a167cd99136"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+
 (function createParticles() {
     const particleLayer = document.getElementById('particles');
+    if (!particleLayer) return; 
+
     const pastelColors = ['#fff7ff', '#dff8ff', '#fbe7f2', '#fef0c7', '#e9dcff'];
     const pixelColors = ['#fff', '#ffd6f0', '#e7f4ff', '#ffd9b6'];
     const rnd = (a, b) => Math.random() * (b - a) + a;
@@ -33,55 +60,124 @@
         animatePixel(px, i);
     }
     function animateSoft(el, seed) {
-        const delay = (seed % 7) * 160;
         const duration = rnd(6000, 14000);
-        el.animate([{ opacity: 0, transform: `translateY(0)scale(0.8)` }, { opacity: rnd(0.35, 0.85), transform: `translateY(-${rnd(6, 40)}px)scale(${rnd(0.9, 1.15)})` }, { opacity: 0, transform: `translateY(-${rnd(40, 90)}px)scale(${rnd(1.05, 1.3)})` }], { duration: duration, iterations: Infinity, delay: delay + rnd(0, 800), easing: 'cubic-bezier(.2,.8,.2,1)' });
+        el.animate([{ opacity: 0, transform: `translateY(0)scale(0.8)` }, { opacity: rnd(0.35, 0.85), transform: `translateY(-${rnd(6, 40)}px)scale(${rnd(0.9, 1.15)})` }, { opacity: 0, transform: `translateY(-${rnd(40, 90)}px)scale(${rnd(1.05, 1.3)})` }], { duration: duration, iterations: Infinity, delay: (seed % 7) * 160, easing: 'cubic-bezier(.2,.8,.2,1)' });
     }
     function animatePixel(el, seed) {
-        const delay = (seed % 5) * 120;
         const duration = rnd(2800, 5400);
         const dirX = (Math.random() > 0.5 ? 1 : -1);
         const drift = rnd(8, 60) * dirX;
-        el.animate([{ opacity: 0, transform: `translate(0px,0px)scale(1)` }, { opacity: rnd(0.5, 0.95), transform: `translate(${drift}px,-${rnd(6, 40)}px)scale(${rnd(0.9, 1.35)})rotate(${rnd(-30, 30)}deg)` }, { opacity: 0, transform: `translate(${drift * 1.2}px,-${rnd(36, 120)}px)scale(${rnd(1.1, 1.6)})rotate(${rnd(-60, 60)}deg)` }], { duration: duration, iterations: Infinity, delay: delay + rnd(0, 400), easing: 'cubic-bezier(.2,.8,.2,1)' });
+        el.animate([{ opacity: 0, transform: `translate(0px,0px)scale(1)` }, { opacity: rnd(0.5, 0.95), transform: `translate(${drift}px,-${rnd(6, 40)}px)scale(${rnd(0.9, 1.35)})rotate(${rnd(-30, 30)}deg)` }, { opacity: 0, transform: `translate(${drift * 1.2}px,-${rnd(36, 120)}px)scale(${rnd(1.1, 1.6)})rotate(${rnd(-60, 60)}deg)` }], { duration: duration, iterations: Infinity, delay: (seed % 5) * 120, easing: 'cubic-bezier(.2,.8,.2,1)' });
     }
 })();
 
 const logo = document.getElementById("logo");
-logo.style.position = "absolute";
-logo.style.top = "20px";
-logo.style.right = "20px";
-logo.style.width = "100px";
-
 const image = document.getElementById("characterSprite");
 const bonusLetter = document.querySelector(".clickHere");
-
 let replacePng = true;
 
-bonusLetter.addEventListener("click", function (event) {
-    if (replacePng) {
-        image.src = "assets/photoOfMe.png"
-    }
-    else {
-        image.src = "assets/chiksomething.png"
-    }
-    replacePng = !replacePng;
-});
+if (bonusLetter && image) {
+    bonusLetter.addEventListener("click", function () {
+        if (replacePng) image.src = "assets/photoOfMe.png";
+        else image.src = "assets/chiksomething.png";
+        replacePng = !replacePng;
+    });
+}
+
+
+const pfpOptions = [
+    "assets/chiPfp.png",
+    "assets/hachiPfp.png",
+    "assets/usagiPfp.png",
+    "assets/momongaPfp.png"
+];
+let currentPfpIndex = 0;
+let isSignup = false;
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('button, a').forEach(el => {
-        el.addEventListener('mouseenter', () => {
+    const backdrop = document.getElementById('loginBackdrop');
+    const anonBtn = document.getElementById('anonBtn');
+    const loginBtn = document.getElementById('doLoginBtn');
+    const toggleBtn = document.getElementById('toggleMode');
+    const title = document.getElementById('loginTitle');
+    const emailInput = document.getElementById('emailInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const userHud = document.getElementById('userProfileHud');
+    const displayEmail = document.getElementById('displayEmail');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const pfpImg = document.getElementById('currentUserPfp');
 
-            el.style.cursor = "url('assets/cursorMomonga2.png'), pointer";
-        });
-        el.addEventListener('mouseleave', () => {
+    function closePopup() {
+        backdrop.style.opacity = '0';
+        setTimeout(() => backdrop.style.display = 'none', 500);
+    }
 
-            el.style.cursor = "url('assets/cursorMomonga.png'), auto";
-        });
+    function showPopup() {
+        backdrop.style.display = 'flex';
+        setTimeout(() => backdrop.style.opacity = '1', 10);
+    }
+
+    anonBtn.addEventListener('click', closePopup);
+
+    toggleBtn.addEventListener('click', () => {
+        isSignup = !isSignup;
+        title.innerText = isSignup ? "Sign Up !" : "Welcome !";
+        loginBtn.innerText = isSignup ? "Create Account" : "Login";
+        toggleBtn.innerText = isSignup ? "Have an account? Login" : "Sign Up instead?";
     });
 
-    document.body.addEventListener('error', (e) => {
-        if (e.target.tagName === 'IMG') {
-            document.body.style.cursor = 'auto';
+    loginBtn.addEventListener('click', async () => {
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        if (!email || !password) {
+            alert("Please enter both email and password!");
+            return;
         }
-    }, true);
+
+        loginBtn.innerText = "Processing...";
+
+        try {
+            if (isSignup) {
+                await createUserWithEmailAndPassword(auth, email, password);
+                alert("Account created successfully!");
+            } else {
+                await signInWithEmailAndPassword(auth, email, password);
+                alert("Login successful!");
+            }
+        } catch (error) {
+            console.error("Firebase Auth Error:", error);
+            let cleanMessage = error.message.replace("Firebase: ", "").replace("auth/", "");
+            alert("Error: " + cleanMessage);
+            loginBtn.innerText = isSignup ? "Create Account" : "Login";
+        }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+        signOut(auth).catch((err) => console.error(err));
+    });
+
+    pfpImg.addEventListener('click', () => {
+        currentPfpIndex = (currentPfpIndex + 1) % pfpOptions.length;
+        pfpImg.src = pfpOptions[currentPfpIndex];
+    });
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            closePopup();
+            userHud.style.display = 'flex';
+            displayEmail.innerText = user.email.split('@')[0];
+            if (logo) logo.style.opacity = '0.5';
+        } else {
+            showPopup();
+            userHud.style.display = 'none';
+            if (logo) logo.style.opacity = '1';
+            loginBtn.innerText = "Login";
+        }
+    });
+
+    document.querySelectorAll('button, a, .pfp-container').forEach(el => {
+        el.addEventListener('mouseenter', () => el.style.cursor = "url('assets/cursorMomonga2.png'), pointer");
+        el.addEventListener('mouseleave', () => el.style.cursor = "url('assets/cursorMomonga.png'), auto");
+    });
 });

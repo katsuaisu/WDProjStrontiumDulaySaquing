@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>ChiikArcade Login</title>
+</head>
+
+<body>
+    <div class="bg-blur"></div>
+
+    <div class="login-container">
+        <h1 class="title">Welcome!</h1>
+
+        <form id="authForm" onsubmit="event.preventDefault()">
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="user@chiikawa.cute" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="********" required>
+            </div>
+
+            <div class="buttons">
+                <button id="btnLogin" class="btn main">Login</button>
+                <button id="btnSignup" class="btn sec">Sign Up</button>
+            </div>
+
+            <div class="divider">or</div>
+
+            <button id="btnAnon" class="btn guest">Play as Guest</button>
+        </form>
+        <p id="errorMsg"></p>
+    </div>
+
+    <script type="module" src="login.js"></script>
+</body>
+
+</html>
