@@ -42,7 +42,7 @@ body {
     font-family: 'Kinkee', sans-serif;
     font-size: clamp(4rem, 15vw, 9rem);
     z-index: 11;
-    pointer-events: none;
+    pointer-events: auto;
 
     background: linear-gradient(90deg,
             #ffffff 0%,
@@ -317,7 +317,7 @@ that fits on the different types of screens like percentages or vw*/
         font-size: clamp(2.5rem, 10vw, 4rem);
         z-index: 20;
         text-align: center;
-        pointer-events: none;
+        pointer-events: auto;
     }
 
     .title .clickHere
