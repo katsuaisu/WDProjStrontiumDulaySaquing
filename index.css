@@ -368,7 +368,7 @@ body {
     transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s ease, box-shadow 0.4s ease;
     overflow: hidden;
     position: relative;
-    
+
 }
 
 @keyframes buttonPulse {
@@ -489,74 +489,112 @@ footer {
     }
 
     .title {
-        top: 5%;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: clamp(2.5rem, 10vw, 4rem);
-        z-index: 20;
-        text-align: center;
-        pointer-events: none;
-    }
+        .about-page {
+            background-image: url('https://i.pinimg.com/originals/f7/3d/27/f73d27687e83de826ace9a7f6aef5fb7.gif');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
 
-    .title .clickHere
-    {
-        pointer-events: auto;
-        cursor: pointer;
-        display: inline-block;
-    }
+        a,
+        button,
+        .machine,
+        .star-decor {
+            cursor: url('assets/cursorMomonga2.png'), pointer;
+        }
 
-    .character-sprite {
-        position: relative;
-        width: 70%;
-        max-width: 280px;
-        left: 50%;
-        bottom: auto;
-        transform: translateX(-50%);
-        margin-top: 20vh;
-        animation: floatSway 5s ease-in-out infinite;
-    }
+        @media(max-width: 600px)
+        /* "@media" is like an if-else for css. this makes the website use a different css type if a screen can 
+handle only a specific width */
 
-    .menu-buttons {
-        position: relative;
-        top: auto;
-        right: auto;
-        transform: none;
-        width: 90%;
-        margin: 30px auto;
-    }
+        /* Since different screens have different pixel widths, we now have to convert everything into units 
+that fits on the different types of screens like percentages or vw*/
 
-    .menu-buttons a {
-        font-size: 1.8rem;
-        padding: 14px;
-    }
+        /* What we are doing right now is media for cellphone type screens :D YAYY !!! */
 
-    footer {
-        font-size: 8px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-}
+            {
+            body {
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
 
-@media((min-width: 601px) and (max-width: 1024px)) {
-    .title {
-        position: absolute;
-        top: 2%;
-        left: 0;
-        width: 100%;
-    }
+            .title {
+                position: fixed;
+                top: 5%;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: clamp(2.5rem, 10vw, 4rem);
+                z-index: 20;
+                text-align: center;
+                pointer-events: auto;
+            }
 
-    .character-sprite {
-        width: 35%;
-        left: 5%;
-        bottom: 8%;
-    }
+            .title .clickHere {
+                pointer-events: auto;
+                cursor: pointer;
+                display: inline-block;
+            }
 
-    .menu-buttons {
-        right: 5%;
-        width: 300px;
-    }
+            .character-sprite {
+                position: relative;
+                width: 70%;
+                max-width: 280px;
+                left: 50%;
+                bottom: auto;
+                transform: translateX(-50%);
+                margin-top: 20vh;
+                animation: floatSway 5s ease-in-out infinite;
+            }
 
-    .menu-buttons a {
-        font-size: 2.2rem;
-    }
-}
+            .menu-buttons {
+                position: relative;
+                top: auto;
+                right: auto;
+                transform: none;
+                width: 90%;
+                margin: 30px auto;
+            }
+
+            .menu-buttons a {
+                font-size: 1.8rem;
+                padding: 14px;
+            }
+
+            footer {
+                position: relative;
+                bottom: auto;
+
+                footer {
+                    font-size: 8px;
+                    margin-bottom: 20px;
+                    text-align: center;
+                }
+            }
+
+            @media((min-width: 601px) and (max-width: 1024px)) {
+                .title {
+                    position: absolute;
+                    top: 2%;
+                    left: 0;
+                    width: 100%;
+                }
+
+                .character-sprite {
+                    width: 35%;
+                    left: 5%;
+                    bottom: 8%;
+                }
+
+                .menu-buttons {
+                    right: 5%;
+                    width: 300px;
+                }
+
+                .menu-buttons a {
+                    font-size: 2.2rem;
+                }
+            }
