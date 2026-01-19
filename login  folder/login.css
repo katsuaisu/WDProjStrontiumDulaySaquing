@@ -1,0 +1,73 @@
+body
+{
+  margin: 0;
+  font-family: calibri;
+  color: rgb(0, 0, 0);
+  background-color: lightgoldenrodyellow;
+  text-align: center;
+  font-size: 30px;
+}
+
+form
+{
+    max-width: 700px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px 50px;
+    border-radius: 12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
+
+fieldset
+{
+    border: none;
+    margin-bottom: 35px;
+}
+
+label
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+input, select, textarea
+{
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+}
+
+input[type = "radio"]
+{
+    width: auto;
+    margin-right: 8px;
+}
+
+label:has(input[type = "radio"])
+{
+    flex-direction: row;
+    align-items: center;
+    font-size: 20px;
+}
+
+.button
+{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #0d728b; 
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: background 0.4s ease;
+}
+
+.button:hover
+{
+  background: rgb(126, 157, 88); 
+}
