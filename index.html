@@ -10,6 +10,48 @@
 
 <body>
 
+    <div id="userProfileHud" class="user-hud" style="display: none;">
+        <div class="pfp-container">
+            <img src="assets/chiPfp.png" id="currentUserPfp" alt="Profile" title="Click to switch character!">
+        </div>
+        <div class="user-info">
+            <span id="displayEmail">User</span>
+            <button id="logoutBtn" class="logout-link">Logout</button>
+        </div>
+    </div>
+
+    <div class="login-backdrop" id="loginBackdrop">
+        <div class="login-card">
+            <div class="decoration-star" style="top: -20px; right: -20px;">★</div>
+            <div class="decoration-star" style="bottom: 10px; left: -15px; font-size: 2rem;">★</div>
+
+            <h2 id="loginTitle">Welcome !</h2>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="emailInput" class="cute-input" placeholder="enter email...">
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="passwordInput" class="cute-input" placeholder="shhh...">
+            </div>
+
+            <div class="buttons-area">
+                <button class="action-btn" id="doLoginBtn">Login</button>
+                <button class="secondary-btn" id="toggleMode">Sign Up instead?</button>
+            </div>
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+            <button class="anon-link" id="anonBtn">
+                Just looking around? (Anonymous) &rarr;
+            </button>
+        </div>
+    </div>
+
     <img src="assets/Webpage_Logo.png" id="logo" alt="Website Logo">
 
     <div class="game-container" id="gameContainer">
@@ -38,6 +80,7 @@
         <p>Psst...Want a new character? Click a letter from the title for a surprise ;3</p>
     </footer>
 
-    <script src="indexFile.js"></script>
+    <script type="module" src="indexFile.js"></script>
 </body>
+
 </html>

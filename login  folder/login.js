@@ -38,3 +38,50 @@ function checkVal(input)
         input.style.border = "";
     }
 }
+
+const emailInput = document.getElementById('email');
+const passInput = document.getElementById('password');
+const btnLogin = document.getElementById('btnLogin');
+const btnSignup = document.getElementById('btnSignup');
+const btnAnon = document.getElementById('btnAnon');
+const errorMsg = document.getElementById('errorMsg');
+
+// Check if already logged in
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        window.location.href = "index.html";
+    }
+});
+
+// Helper to show errors
+const showError = (error) => {
+    const cleanMsg = error.code.replace('auth/', '').replace(/-/g, ' ');
+    errorMsg.innerText = cleanMsg;
+};
+
+// Event Listeners
+btnLogin.addEventListener('click', () => {
+    const email = emailInput.value;
+    const pass = passInput.value;
+    if(!email || !pass) return showError({code: 'Enter email & password'});
+    
+    signInWithEmailAndPassword(auth, email, pass)
+        .then(() => window.location.href = "index.html")
+        .catch(showError);
+});
+
+btnSignup.addEventListener('click', () => {
+    const email = emailInput.value;
+    const pass = passInput.value;
+    if(!email || !pass) return showError({code: 'Enter email & password'});
+
+    createUserWithEmailAndPassword(auth, email, pass)
+        .then(() => window.location.href = "index.html")
+        .catch(showError);
+});
+
+btnAnon.addEventListener('click', () => {
+    signInAnonymously(auth)
+        .then(() => window.location.href = "index.html")
+        .catch(showError);
+});

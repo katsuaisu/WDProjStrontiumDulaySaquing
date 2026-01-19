@@ -1,6 +1,13 @@
 @font-face {
     font-family: 'Kinkee';
-    src: url('KINKEE__.TTF') format('truetype');
+    src: url('Kinkee.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SweetyRasty';
+    src: url('assets/Sweety Rasty.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -28,34 +35,258 @@ body {
 }
 
 
+.user-hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: bounceIn 0.8s ease;
+}
+
+.pfp-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    background: #d3c1ff;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.pfp-container:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.pfp-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+#displayEmail {
+    font-family: 'SweetyRasty', sans-serif;
+    color: #fff;
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.logout-link {
+    background: none;
+    border: none;
+    color: #ff9ecd;
+    font-family: 'SweetyRasty', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.logout-link:hover {
+    color: #fff;
+}
+
+
+.login-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 26, 46, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.login-card {
+    background: linear-gradient(180deg, #fff 0%, #fff0f5 100%);
+    width: 90%;
+    max-width: 380px;
+    padding: 30px;
+    border-radius: 25px;
+    border: 4px solid #d3c1ff;
+    box-shadow:
+        0 0 0 4px #fff,
+        0 10px 25px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+    animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.decoration-star {
+    position: absolute;
+    color: #ffd6f0;
+    font-size: 3rem;
+    text-shadow: 2px 2px 0px #ff9ecd;
+    animation: spinSlow 8s infinite linear;
+    pointer-events: none;
+}
+
+@keyframes spinSlow {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#loginTitle {
+    font-family: 'Kinkee', sans-serif;
+    font-size: 3.5rem;
+    margin: 0 0 20px 0;
+    background: linear-gradient(90deg, #d3c1ff, #f6d8e2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.1));
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    font-family: 'SweetyRasty', sans-serif;
+    font-size: 1.5rem;
+    color: #888;
+    margin-left: 10px;
+    display: block;
+}
+
+.cute-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px dashed #d3c1ff;
+    border-radius: 15px;
+    font-family: 'SweetyRasty', sans-serif;
+    font-size: 1.2rem;
+    outline: none;
+    background: #fff;
+    color: #555;
+    transition: 0.3s;
+}
+
+.cute-input:focus {
+    border-color: #ff9ecd;
+    background: #fffcf5;
+    transform: scale(1.02);
+}
+
+.buttons-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.action-btn {
+    font-family: 'Kinkee';
+    font-size: 2rem;
+    padding: 10px;
+    border-radius: 50px;
+    border: none;
+    background: #d3c1ff;
+    color: white;
+    text-shadow: 1px 1px 0 #999;
+    box-shadow: 0 4px 0 #b5a0e8;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.action-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #b5a0e8;
+}
+
+.secondary-btn {
+    background: none;
+    border: none;
+    font-family: 'SweetyRasty';
+    font-size: 1.1rem;
+    color: #ff9ecd;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.divider {
+    margin: 15px 0;
+    border-bottom: 2px dotted #eee;
+    height: 10px;
+    text-align: center;
+}
+
+.divider span {
+    background: #fff0f5;
+    padding: 0 10px;
+    color: #ccc;
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
+.anon-link {
+    background: #eee;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-family: 'SweetyRasty';
+    font-size: 1.2rem;
+    color: #666;
+    cursor: pointer;
+    width: 100%;
+}
+
+.anon-link:hover {
+    background: #e0e0e0;
+}
+
 .title {
     position: absolute;
     top: -10%;
     left: 0;
     width: 100%;
-
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-
     font-family: 'Kinkee', sans-serif;
     font-size: clamp(4rem, 15vw, 9rem);
     z-index: 11;
     pointer-events: none;
-
-    background: linear-gradient(90deg,
-            #ffffff 0%,
-            #d3c1ff 25%,
-            #ffffff 50%,
-            #f6d8e2 75%,
-            #ffffff 100%);
+    background: linear-gradient(90deg, #ffffff 0%, #d3c1ff 25%, #ffffff 50%, #f6d8e2 75%, #ffffff 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
     filter: drop-shadow(0 2px 0 #ccc) drop-shadow(0 4px 0 #bbb) drop-shadow(0 10px 15px rgba(0, 0, 0, 0.4));
-
     animation: glossyShine 3s infinite linear, floatSway 5s ease-in-out infinite;
 }
 
@@ -67,20 +298,6 @@ body {
     100% {
         background-position: 0% center;
     }
-}
-
-
-.bg-gloss-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.1) 0%,
-            rgba(255, 255, 255, 0.05) 40%,
-            rgba(255, 255, 255, 0) 50%,
-            rgba(255, 255, 255, 0.05) 60%,
-            rgba(255, 255, 255, 0.1) 100%);
-    z-index: 1;
-    pointer-events: none;
 }
 
 .game-container {
@@ -113,7 +330,6 @@ body {
     user-select: none;
     opacity: 0.95;
 }
-
 
 .menu-buttons {
     position: absolute;
@@ -149,12 +365,7 @@ body {
     -webkit-text-stroke: 1px #ff9ecd;
     text-shadow: 2px 2px 0px #ff9ecd;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-
-
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
-        background 0.4s ease,
-        box-shadow 0.4s ease;
-
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s ease, box-shadow 0.4s ease;
     overflow: hidden;
     position: relative;
     animation: buttonPulse 6s infinite ease-in-out;
@@ -220,7 +431,6 @@ body {
     }
 }
 
-
 .particles {
     position: absolute;
     inset: 0;
@@ -273,48 +483,17 @@ footer {
     transform: scale(1.2);
 }
 
-.about-page {
-    background-image: url('https://i.pinimg.com/originals/f7/3d/27/f73d27687e83de826ace9a7f6aef5fb7.gif');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-}
-
-a,
-button,
-.machine,
-.star-decor {
-    cursor: url('assets/cursorMomonga2.png'), pointer;
-}
-
-@media(max-width: 600px) 
-
-/* "@media" is like an if-else for css. this makes the website use a different css type if a screen can 
-handle only a specific width */
-
-/* Since different screens have different pixel widths, we now have to convert everything into units 
-that fits on the different types of screens like percentages or vw*/
-
-/* What we are doing right now is media for cellphone type screens :D YAYY !!! */
-
-{
-    body
-    {
+@media(max-width: 600px) {
+    body {
         overflow: auto;
     }
 
-    .title
-    {
+    .title {
         top: 5%;
         font-size: clamp(2.5rem, 10vw, 4rem);
     }
 
-    .character-sprite
-    {
+    .character-sprite {
         position: relative;
         width: 70%;
         max-width: 280px;
@@ -324,8 +503,7 @@ that fits on the different types of screens like percentages or vw*/
         margin-top: 20vh;
     }
 
-    .menu-buttons
-    {
+    .menu-buttons {
         position: relative;
         top: auto;
         right: auto;
@@ -334,44 +512,37 @@ that fits on the different types of screens like percentages or vw*/
         margin: 30px auto;
     }
 
-    .menu-buttons a
-    {
+    .menu-buttons a {
         font-size: 1.8rem;
         padding: 14px;
     }
 
-    footer
-    {
+    footer {
         font-size: 8px;
         padding: 6px 0;
     }
 }
 
-/* time to do the same for tablets now! */
-
-@media((min-width: 601px) and (max-width: 1024px))
-{
-    .title
-    {
-        top: 0;
-        font-size: clamp(3.5rem, 10vw, 6rem);
+@media((min-width: 601px) and (max-width: 1024px)) {
+    .title {
+        position: absolute;
+        top: 2%;
+        left: 0;
+        width: 100%;
     }
 
-    .character-sprite
-    {
+    .character-sprite {
         width: 35%;
         left: 5%;
         bottom: 8%;
     }
 
-    .menu-buttons
-    {
+    .menu-buttons {
         right: 5%;
         width: 300px;
     }
 
-    .menu-buttons a
-    {
+    .menu-buttons a {
         font-size: 2.2rem;
     }
 }
