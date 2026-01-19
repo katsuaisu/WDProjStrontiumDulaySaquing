@@ -413,7 +413,8 @@ body::before {
     100% { background-position: 60px 60px, 90px 90px; }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 800px) 
+{
     .machine-shelf { 
         flex-wrap: wrap; 
         height: auto; 

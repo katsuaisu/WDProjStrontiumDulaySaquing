@@ -368,7 +368,7 @@ body {
     transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s ease, box-shadow 0.4s ease;
     overflow: hidden;
     position: relative;
-    animation: buttonPulse 6s infinite ease-in-out;
+    
 }
 
 @keyframes buttonPulse {
@@ -401,7 +401,7 @@ body {
 
 .menu-buttons a:hover {
     animation-play-state: paused;
-    transform: scale(1.1) translateX(-8px);
+    transform: translateY(-4px);
     background: rgba(255, 255, 255, 0.35);
     border-color: #ffffff;
     box-shadow: 0 15px 35px rgba(255, 158, 205, 0.4);
@@ -483,14 +483,67 @@ footer {
     transform: scale(1.2);
 }
 
+<<<<<<< HEAD
 @media(max-width: 600px) {
     body {
         overflow: auto;
     }
 
     .title {
+=======
+.about-page {
+    background-image: url('https://i.pinimg.com/originals/f7/3d/27/f73d27687e83de826ace9a7f6aef5fb7.gif');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+a,
+button,
+.machine,
+.star-decor {
+    cursor: url('assets/cursorMomonga2.png'), pointer;
+}
+
+@media(max-width: 600px) 
+
+/* "@media" is like an if-else for css. this makes the website use a different css type if a screen can 
+handle only a specific width */
+
+/* Since different screens have different pixel widths, we now have to convert everything into units 
+that fits on the different types of screens like percentages or vw*/
+
+/* What we are doing right now is media for cellphone type screens :D YAYY !!! */
+
+{
+    body
+    {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .title
+    {
+        position: fixed;
+>>>>>>> d732bc64f4c0fa75e4dd3e292f153fdcf3c71d68
         top: 5%;
+        left: 50%;
+        transform: translateX(-50%);
         font-size: clamp(2.5rem, 10vw, 4rem);
+        z-index: 20;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    .title .clickHere
+    {
+        pointer-events: auto;
+        cursor: pointer;
+        display: inline-block;
     }
 
     .character-sprite {
@@ -501,6 +554,7 @@ footer {
         bottom: auto;
         transform: translateX(-50%);
         margin-top: 20vh;
+        animation: floatSway 5s ease-in-out infinite;
     }
 
     .menu-buttons {
@@ -517,9 +571,17 @@ footer {
         padding: 14px;
     }
 
+<<<<<<< HEAD
     footer {
+=======
+    footer
+    {
+        position: relative;
+        bottom: auto;
+>>>>>>> d732bc64f4c0fa75e4dd3e292f153fdcf3c71d68
         font-size: 8px;
-        padding: 6px 0;
+        margin-bottom: 20px;
+        text-align: center;
     }
 }
 
