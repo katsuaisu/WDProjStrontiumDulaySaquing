@@ -304,14 +304,27 @@ that fits on the different types of screens like percentages or vw*/
 {
     body
     {
-        overflow: auto;
+        overflow-y: auto;
         overflow-x: hidden;
     }
 
     .title
     {
+        position: fixed;
         top: 5%;
+        left: 50%;
+        transform: translateX(-50%);
         font-size: clamp(2.5rem, 10vw, 4rem);
+        z-index: 20;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    .title .clickHere
+    {
+        pointer-events: auto;
+        cursor: pointer;
+        display: inline-block;
     }
 
     .character-sprite
@@ -323,6 +336,7 @@ that fits on the different types of screens like percentages or vw*/
         bottom: auto;
         transform: translateX(-50%);
         margin-top: 20vh;
+        animation: floatSway 5s ease-in-out infinite;
     }
 
     .menu-buttons
@@ -343,8 +357,11 @@ that fits on the different types of screens like percentages or vw*/
 
     footer
     {
+        position: relative;
+        bottom: auto;
         font-size: 8px;
-        padding: 6px 0;
+        margin-bottom: 20px;
+        text-align: center;
     }
 }
 
