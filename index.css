@@ -157,7 +157,7 @@ body {
 
     overflow: hidden;
     position: relative;
-    animation: buttonPulse 6s infinite ease-in-out;
+    
 }
 
 @keyframes buttonPulse {
@@ -190,7 +190,7 @@ body {
 
 .menu-buttons a:hover {
     animation-play-state: paused;
-    transform: scale(1.1) translateX(-8px);
+    transform: translateY(-4px);
     background: rgba(255, 255, 255, 0.35);
     border-color: #ffffff;
     box-shadow: 0 15px 35px rgba(255, 158, 205, 0.4);
@@ -305,6 +305,7 @@ that fits on the different types of screens like percentages or vw*/
     body
     {
         overflow: auto;
+        overflow-x: hidden;
     }
 
     .title
