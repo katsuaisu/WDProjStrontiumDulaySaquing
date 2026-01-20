@@ -34,6 +34,62 @@ body {
     cursor: url('assets/cursorMomonga.png'), auto;
 }
 
+/* music button // mute and unmute  */
+.music-toggle {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 10000;
+    /* top right posotion */
+
+    /* shape */
+    padding: 10px 22px;
+    border-radius: 50px;
+
+    /* bg */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* border mlamang */
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-bottom: 4px solid rgba(255, 255, 255, 0.3);
+    /* 3d ish shadow thing */
+    box-shadow:
+        inset 0 2px 5px rgba(255, 255, 255, 0.8),
+        /* shine */
+        0 5px 15px rgba(255, 158, 205, 0.4);
+    /* glow */
+
+    /* text */
+    color: white;
+    font-family: 'Kinkee', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+
+    /* cubic bezier is for like glossy stuff  and animations basta  */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* for like bouncing */
+}
+
+.music-toggle:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.25));
+    border-color: #fff;
+    box-shadow:
+        inset 0 2px 10px rgba(255, 255, 255, 1),
+        0 10px 25px rgba(255, 158, 205, 0.6);
+}
+
+.music-toggle:active {
+    transform: translateY(2px) scale(0.95);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    /* Ssquishayyyy */
+}
+
+/*lol lil huddy */
 
 .user-hud {
     position: absolute;
@@ -483,142 +539,107 @@ footer {
     transform: scale(1.2);
 }
 
+/* MEDIAAAA*/
+
 @media(max-width: 600px) {
+    /* What we are doing right now is media for cellphone type screens :D YAYY !!! */
+
     body {
         overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .about-page {
+        background-image: url('https://i.pinimg.com/originals/f7/3d/27/f73d27687e83de826ace9a7f6aef5fb7.gif');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    a,
+    button,
+    .machine,
+    .star-decor {
+        cursor: url('assets/cursorMomonga2.png'), pointer;
     }
 
     .title {
-        .about-page {
-            background-image: url('https://i.pinimg.com/originals/f7/3d/27/f73d27687e83de826ace9a7f6aef5fb7.gif');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100vw;
-        }
+        position: fixed;
+        top: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: clamp(2.5rem, 10vw, 4rem);
+        z-index: 20;
+        text-align: center;
+        pointer-events: auto;
+    }
 
-        a,
-        button,
-        .machine,
-        .star-decor {
-            cursor: url('assets/cursorMomonga2.png'), pointer;
-        }
+    .title .clickHere {
+        pointer-events: auto;
+        cursor: pointer;
+        display: inline-block;
+    }
 
-        @media(max-width: 600px)
-        /* "@media" is like an if-else for css. this makes the website use a different css type if a screen can 
-handle only a specific width */
+    .character-sprite {
+        position: relative;
+        width: 70%;
+        max-width: 280px;
+        left: 50%;
+        bottom: auto;
+        transform: translateX(-50%);
+        margin-top: 20vh;
+        animation: floatSway 5s ease-in-out infinite;
+    }
 
-        /* Since different screens have different pixel widths, we now have to convert everything into units 
-that fits on the different types of screens like percentages or vw*/
+    .menu-buttons {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        width: 90%;
+        margin: 30px auto;
+    }
 
-        /* What we are doing right now is media for cellphone type screens :D YAYY !!! */
+    .menu-buttons a {
+        font-size: 1.8rem;
+        padding: 14px;
+    }
 
-            {
-            body {
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
+    footer {
+        position: relative;
+        bottom: auto;
+        font-size: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+}
 
-            .title {
-                position: fixed;
-                top: 5%;
-                left: 50%;
-                transform: translateX(-50%);
-                font-size: clamp(2.5rem, 10vw, 4rem);
-                z-index: 20;
-                text-align: center;
-                pointer-events: auto;
-            }
+/* for tablets..? */
+@media(min-width: 601px) and (max-width: 1024px) {
+    .title {
+        position: absolute;
+        top: 2%;
+        left: 0;
+        width: 100%;
+    }
 
-            .title .clickHere {
-                pointer-events: auto;
-                cursor: pointer;
-                display: inline-block;
-            }
+    .character-sprite {
+        width: 35%;
+        left: 5%;
+        bottom: 8%;
+    }
 
-            .character-sprite {
-                position: relative;
-                width: 70%;
-                max-width: 280px;
-                left: 50%;
-                bottom: auto;
-                transform: translateX(-50%);
-                margin-top: 20vh;
-                animation: floatSway 5s ease-in-out infinite;
-            }
+    .menu-buttons {
+        right: 5%;
+        width: 300px;
+    }
 
-            .menu-buttons {
-                position: relative;
-                top: auto;
-                right: auto;
-                transform: none;
-                width: 90%;
-                margin: 30px auto;
-            }
-
-            .menu-buttons a {
-                font-size: 1.8rem;
-                padding: 14px;
-            }
-
-            footer {
-                position: relative;
-                bottom: auto;
-
-                footer {
-                    font-size: 8px;
-                    margin-bottom: 20px;
-                    text-align: center;
-                }
-            }
-
-            @media((min-width: 601px) and (max-width: 1024px)) {
-                .title {
-                    position: absolute;
-                    top: 2%;
-                    left: 0;
-                    width: 100%;
-                }
-
-                .character-sprite {
-                    width: 35%;
-                    left: 5%;
-                    bottom: 8%;
-                }
-
-                .menu-buttons {
-                    right: 5%;
-                    width: 300px;
-                }
-
-                .menu-buttons a {
-                    font-size: 2.2rem;
-                }
-
-                .music-toggle {
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    z-index: 10000;
-                    padding: 8px 18px;
-                    background: rgba(255, 255, 255, 0.2);
-                    backdrop-filter: blur(10px);
-                    -webkit-backdrop-filter: blur(10px);
-                    border: 2px solid rgba(255, 255, 255, 0.5);
-                    border-radius: 50px;
-                    color: white;
-                    font-family: 'SweetyRasty', sans-serif;
-                    font-size: 1rem;
-                    cursor: pointer;
-                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-                    transition: all 0.3s ease;
-                }
-
-                .music-toggle:hover {
-                    background: rgba(255, 255, 255, 0.4);
-                    transform: scale(1.05);
-                }
-            }
+    .menu-buttons a {
+        font-size: 2.2rem;
+    }
+}
