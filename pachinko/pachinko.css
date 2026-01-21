@@ -1,5 +1,5 @@
 :root {
-    --font-main: 'Fredoka', sans-serif;
+    --font-main: 'Kinkee', sans-serif;
     --c-pink: #ffb7c5;
     --c-pink-dark: #ff8fa3;
     --c-blue: #a2d2ff;
@@ -9,6 +9,20 @@
     --glass-bg: rgba(255, 255, 255, 0.65);
     --glass-border: 2px solid rgba(255, 255, 255, 0.9);
     --shadow-soft: 0 10px 25px rgba(255, 183, 197, 0.4);
+}
+
+@font-face {
+    font-family: 'Kinkee';
+    src: url('../assets/Kinkee.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SweetyRasty';
+    src: url('../assets/SweetyRasty.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {

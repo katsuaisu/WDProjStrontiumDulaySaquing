@@ -5,7 +5,7 @@
     --accent-mint: #B5EAD7;
     --accent-yellow: #FFF5BA;
     --text-color: #6D5F55;
-    --font-main: 'Sweety Rasty', sans-serif;
+    --font-main: '../assets/SweetyRasty', sans-serif;
 }
 
 body {
