@@ -5,7 +5,14 @@
     --accent-mint: #B5EAD7;
     --accent-yellow: #FFF5BA;
     --text-color: #6D5F55;
-    --font-main: '../assets/SweetyRasty', sans-serif;
+    --font-main: 'SweetyRasty', sans-serif; 
+}
+
+@font-face {
+    font-family: 'SweetyRasty';
+    src: url('../assets/SweetyRasty.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
