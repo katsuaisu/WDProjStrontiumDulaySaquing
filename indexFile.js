@@ -116,10 +116,10 @@ if (bonusLetter && image) {
  * its just an array lol
  */
 const pfpOptions = [
-    "../assets/chiPfp.png",
-    "../assets/hachiPfp.png",
-    "../assets/usagiPfp.png",
-    "../assets/momongaPfp.png"
+    "assets/chiPfp.png",
+    "assets/hachiPfp.png",
+    "assets/usagiPfp.png",
+    "assets/momongaPfp.png"
 ];
 let currentPfpIndex = 0;
 let isSignup = false;
