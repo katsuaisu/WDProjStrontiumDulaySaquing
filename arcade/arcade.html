@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChiikArcade Games</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="arcade.css">
 </head>
+
 <body>
+
+    <button id="musicToggle" class="music-toggle">PLAY MUSIC</button>
+    <audio id="bgMusic" loop>
+        <source src="../music.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="arcade-container">
         <h1 class="header-title">
@@ -19,7 +27,7 @@
         </h1>
 
         <div class="machine-shelf">
-            
+
             <a href="../claw machine/clawmachine.html" class="machine claw">
                 <div class="preview-text">
                     <span class="pixel-label">GAME 01</span>
@@ -119,7 +127,19 @@
 
         </div>
     </div>
-    
+
+    <div id="chiikawaDialogue" class="chi-dialogue-container" style="display: none; opacity: 0;">
+        <div class="chi-avatar-box">
+            <img id="chiExpression" src="../assets/happyChiikawa.png" alt="Chiikawa">
+        </div>
+        <div class="chi-text-box">
+            <h3 class="chi-name">Chiikawa</h3>
+            <p id="chiText" class="chi-typewriter"></p>
+            <div class="chi-next-arrow">▼</div>
+        </div>
+    </div>
+
     <script src="arcade.js"></script>
 </body>
+
 </html>
