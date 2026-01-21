@@ -56,11 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
             img: "../assets/happyChiikawa.png"
         },
         {
-            text: "Which one should we try first...?",
+            text: "Which one should we try first? I heard Usagi's Snack Run is the hardest..",
             img: "../assets/thinkingChiikawa.png"
         },
         {
-            text: "Let's do our best!!",
+            text: "But I think the Yoroi-Sans haven't finished Snake and Slot Machine..",
+            img: "../assets/shockedChiikawa.png"
+        },
+        {
+            text: "Anyways...Enjoy playing! Make sure to vote my website if you love the games :)",
             img: "../assets/happyChiikawa.png"
         }
     ];

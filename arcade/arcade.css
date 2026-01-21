@@ -1,17 +1,16 @@
 @font-face {
     font-family: 'Kinkee';
-    src: url('Kinkee.ttf') format('truetype');
+    src: url('../assets/Kinkee.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'SweetyRasty';
-    src: url('../assets/Sweety Rasty.otf') format('opentype');
+    src: url('../assets/SweetyRasty.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
-
 :root {
     --glass-bg: rgba(255, 255, 255, 0.45);
     --glass-border: rgba(255, 255, 255, 0.6);

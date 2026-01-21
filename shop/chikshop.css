@@ -1,8 +1,9 @@
 @font-face {
     font-family: 'Kinkee';
-    src: url('../assets/KINKEE__.TTF') format('truetype');
+    src: url('../assets/Kinkee.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
-
 * {
     cursor: none !important;
     font-family: 'Kinkee', sans-serif;
