@@ -1,0 +1,226 @@
+:root {
+    --bg-overlay: rgba(255, 248, 230, 0.6);
+    --card-bg: rgba(255, 250, 235, 0.9);
+    --accent-caramel: #D4A574;
+    --accent-cream: #FFF4E0;
+    --accent-pudding: #F5E6C8;
+    --text-color: #8B7355;
+    --snake-color: #967867;
+    --font-main: 'SweetyRasty', sans-serif; 
+}
+
+@font-face {
+    font-family: 'SweetyRasty';
+    src: url('../SweetyRasty.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    font-family: var(--font-main);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: url('../assets/chiikawaFight.gif') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 245, 220, 0.5);
+    z-index: 0;
+}
+
+.main-card {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 40px;
+    box-shadow: 0 20px 40px rgba(212, 165, 116, 0.2);
+    gap: 30px;
+    max-width: 850px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    gap: 22px;
+    text-align: center;
+}
+
+.logo-area h1 {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--accent-caramel);
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.6);
+    transform: rotate(-3deg);
+}
+
+.stat-box {
+    background: #FFF9F0;
+    padding: 15px;
+    border-radius: 20px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(212, 165, 116, 0.15);
+}
+
+.label {
+    font-family: var(--font-main);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.value {
+    font-family: var(--font-main);
+    font-size: 2rem;
+    color: var(--accent-caramel);
+}
+
+.instructions {
+    margin-top: 15px;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.instructions strong {
+    color: var(--accent-caramel);
+}
+
+.keys {
+    margin: 10px 0;
+}
+
+.keys span {
+    font-family: var(--font-main);
+    display: inline-block;
+    background: #FFFAF0;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin: 3px;
+    box-shadow: 0 3px 0 #F5E6C8;
+    font-size: 0.85rem;
+    color: var(--accent-caramel);
+}
+
+.hint {
+    margin-top: 12px;
+    font-size: 0.78rem;
+    color: #AAA;
+    line-height: 1.4;
+}
+
+.canvas-wrapper {
+    position: relative;
+    border-radius: 25px;
+    padding: 10px;
+    background: #FFF;
+    box-shadow: 0 8px 20px rgba(212, 165, 116, 0.2);
+}
+
+canvas {
+    display: block;
+    border-radius: 18px;
+    background: #FFFCF5;
+}
+
+.overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: rgba(255, 250, 235, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.modal {
+    font-family: var(--font-main);
+    background: #FFF;
+    padding: 30px 50px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3);
+    border: 3px solid var(--accent-pudding);
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+h2 {
+    font-family: var(--font-title);
+    color: var(--accent-caramel);
+    font-size: 2.2rem;
+    margin: 0 0 10px 0;
+}
+
+.modal p {
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 8px;
+}
+
+button {
+    font-family: var(--font-main);
+    background: var(--accent-pudding);
+    border: none;
+    padding: 14px 35px;
+    border-radius: 50px;
+    color: #8B7355;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 6px 0 var(--accent-caramel);
+    transition: transform 0.1s;
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+button:active {
+    transform: translateY(4px) scale(0.98);
+    box-shadow: 0 1px 0 var(--accent-caramel);
+}
+
+@media (max-width: 800px) {
+    .main-card {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .instructions {
+        display: none;
+    }
+}

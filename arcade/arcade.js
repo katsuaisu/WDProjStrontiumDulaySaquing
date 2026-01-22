@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             img: "../assets/thinkingChiikawa.png"
         },
         {
-            text: "But I think the Yoroi-Sans haven't finished Snake and Slot Machine..",
+            text: "But I think the Yoroi-Sans haven't finished the Slot Machine..",
             img: "../assets/shockedChiikawa.png"
         },
         {
