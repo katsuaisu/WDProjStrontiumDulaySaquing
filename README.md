@@ -78,4 +78,4 @@ Chiikawa, Hachiware, and Usagi want to have some fun :) Score some points and sh
 ## This project does NOT include:
 This project does not include real-life prizes, any licensed Chiikawa merchandise, or gambling arcade games. You do not need to spend to play our games.
 
-## Submited by Uno Dulay and Rei Saquing on March 18,2026 to Sir Roy from PSHS-MC
+## Submited by Uno Dulay and Rei Saquing on March 18,2026 to Sir Roy from PSHS-MC in Partial fulfillment of the requirements in CS3 of DOST-PSHS-MC
