@@ -9,7 +9,8 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -140,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayEmail = document.getElementById('displayEmail');
     const logoutBtn = document.getElementById('logoutBtn');
     const pfpImg = document.getElementById('currentUserPfp');
+    const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
 
     // hiding the login overlay
     function closePopup() {
