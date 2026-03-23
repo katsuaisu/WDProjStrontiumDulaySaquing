@@ -249,6 +249,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    forgotPasswordBtn.addEventListener('click', async () => { //we're adding resetting password :D
+    const email = emailInput.value;
+
+    if (!email) {
+        alert("Enter your email first!");
+        return;
+    }
+
+    try {
+        await sendPasswordResetEmail(auth, email);
+        alert("Password reset email sent! Check your inbox.");
+    } catch (error) {
+        alert("Error: " + error.message);
+    }
+});
+
     // stopping autoplay by like only playing music once smth is clicked 
     document.addEventListener('click', () => {
         if (music.paused && musicToggle.innerText === "PLAY MUSIC") {
